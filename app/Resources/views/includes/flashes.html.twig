@@ -1,0 +1,8 @@
+{% for tipo, mensajes in app.session.flashbag.all() %}
+    {% for mensaje in mensajes %}
+        <div class="flash-{{tipo}}">
+        {{mensaje}}{{ tipo == 'cuenta-inactiva' ?  '<a href="#emailRegDialog" role="button" data-toggle="modal" id="confirm-regis">aquí.</a>' : '' }}      
+        </div>
+    {% endfor %}
+{% endfor %}
+{% include ':includes:dialogEmailRegistro.html.twig' %}

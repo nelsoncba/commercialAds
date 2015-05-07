@@ -1,0 +1,82 @@
+.login-container{
+    height: 80%;
+}
+.box-login{
+    border: solid 1px #ccc;
+    border-radius: 4px;
+    margin-top: 47px;
+    margin-bottom: 193px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+.form-login{
+    width: 300px;
+    margin: 20px auto;
+}
+.width-login{
+    margin-bottom: 10px !important;
+    width: 300px;
+}
+@media screen and (max-width: 768px){
+    .login-container{
+        height: 100%;
+    }
+    .box-login{
+        width: 350px;
+        margin-top:60px;
+        margin-bottom: 155px;
+        
+    }
+    .form-login{
+        width: 300px;
+        margin: 20px auto;
+    }
+}
+@media screen and (max-width: 450px){
+    .box-login{
+        width: 260px;
+        margin-top: 35px;
+        margin-bottom: 180px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .form-login{
+        width: 220px;
+        margin: 10px auto;
+    }
+    .width-login{
+        width: 215px;
+    }
+}
+
+.form-note{
+    font-size: 11px;
+    text-align: justify;
+    margin: 20px; 
+}
+.flash-infoRegis, .flash-info{
+    margin: 15px auto;
+    text-align: center; 
+    padding: 10px; 
+    background: #DFF2BF; 
+    border: 1px solid; 
+    color: #4F8A10; 
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+.flash-error, .flash-cuenta-inactiva{
+    margin: 15px auto;
+    text-align: center; 
+    padding: 10px; 
+    background: #f2c3bf; 
+    border: 1px solid; 
+    color: #8a1010; 
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+.error-form{
+    margin: 5px auto;
+    text-align: center;
+    color: #d2322d;
+}

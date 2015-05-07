@@ -1,0 +1,31 @@
+{% extends '::frontend.html.twig' %}
+{% set regionSelected = app.request.attributes.get('region') %}
+{% set citySelected = app.request.attributes.get('city') %}
+{% set categorySelected = app.request.attributes.get('cat') %}
+{% set subcategorySelected = app.request.attributes.get('subcat') %}
+{% set lat = app.request.get('lat') %}
+{% set lng = app.request.get('lng') %}
+{% set address = app.session.get('address')%}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
+{% block id 'user' %}
+
+{% block article %}
+    {{parent()}}
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-main">
+<section class="login-container">
+    {% include ':includes:flashes.html.twig' %}
+    {%block user%}
+        
+    {%endblock%}
+    {% include ':includes:dialogEmailResetPass.html.twig' %} 
+</section>  
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+{% endblock %}

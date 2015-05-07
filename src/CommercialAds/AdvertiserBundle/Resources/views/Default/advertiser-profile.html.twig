@@ -1,0 +1,74 @@
+{% extends 'CommercialAdsAdvertiserBundle:Default:advertiser-main.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
+{% block title %} Datos Anunciante {% endblock %}
+
+{%block advertiser%}
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-datos-anun panel panel-default">
+    <div class="titulo-menulat"><h4>{{action != 'editar' ? 'Ingrese sus datos de anunciante' : 'Datos de anunciante'}}</h4></div>
+<form action="{{action == 'editar' ? path('advertiser_profile') : path('advertiser_register') }}" data-validate="parsley" class="form-anunciante" method="POST">
+    <div class="row ">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <label for="Nombre" class="label-login">Nombre: </label>
+            <input type="text"  name="name" data-required="true"class="form-control width-data-anun" value="{%if action == 'editar'%}{{advertiser.name == null ? '-' : advertiser.name}}{% endif %}"/>
+            <label for="Descripcion" class="label-login">Descripción: </label>
+            <input type="text"  name="description" class="form-control width-data-anun" value="{%if action == 'editar'%}{{advertiser.description == null ? '-' : advertiser.description}}{% endif %}"/>
+            <label for="Provincia" class="label-login">Provincia: </label>
+            <select type="text" id="prov" name="region" data-required="true" class="form-control width-data-anun">
+                {{action != 'editar' ? '<option>Seleccione Provincia</option>' : null}}
+                {% for region in regions %}
+                {%if action == 'editar' and advertiser.city.region.slug == region.slug%}
+                <option value="{{advertiser.city.region.slug}}" selected>{{advertiser.city.region.name}}</option>
+                {% else %}
+                <option value="{{region.slug}}">{{region.name}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            <label for="Localidad" class="label-login">Localidad: </label>
+            <select type="text" id="local" name="city" data-required="true" class="form-control width-data-anun">
+                {% if advertiser %}
+                <option value="{{advertiser.city.slug}}">{{advertiser.city}}</option>
+                {% else %}
+                <option value="">Seleccionar Localidad</option>
+                {% endif %}
+            </select>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+           <label for="Ubicacion de anunciante" class="label-login">Ubicación de anunciante</label>
+                        <div id="map_canvas_3" class="map-registro" ></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6"><label for="Calle" class="label-login">Calle: </label><input type="text" id="calle" name="street" data-required="true" class="form-control width-data-anun" value="{%if action == 'editar'%}{{advertiser.street}}{% endif %}"/>
+</div><div class="col-sm-12 col-md-6 col-lg-6"><label for="Numero" class="label-login">Número: </label><input type="text" id="numero" name="number" data-required="true" class="form-control width-data-anun numero" value="{%if action == 'editar'%}{{advertiser.number}}{% endif %}"/>
+</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4"><label for="Piso" class="label-login">Piso: </label><input type="text" name="floor"  class="form-control width-data-anun" value="{%if action == 'editar'%}{{ advertiser.floor == null ? '-' : advertiser.floor }}{% endif %}"/>
+</div><div class="col-sm-12 col-md-4 col-lg-4"><label for="Dpto" class="label-login">Dpto: </label><input type="text" name="door"  class="form-control width-data-anun" value="{%if action == 'editar'%}{{advertiser.door == null ? '-' : advertiser.door}}{% endif %}"/>
+</div><div class="col-sm-12 col-md-4 col-lg-4"><label for="Codigo Postal" class="label-login">Codigo Postal: </label><input type="text" name="postalCode" class="form-control width-data-anun" value="{%if action == 'editar'%}{{advertiser.postalCode == null ? '-' : advertiser.postalCode}}{% endif %}"/>
+</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-6">
+            <label for="Telefono" class="label-login">Telefono: </label>
+            <input type="text" name="phone" data-required="true" class="form-control width-data-anun" value="{%if action == 'editar'%}{{advertiser.phone}}{% endif %}"/>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-6">
+            <label for="Horarios" class="label-login">Horarios: </label>
+            <input type="text" name="hours" data-required="true" class="form-control width-data-anun" value="{%if action == 'editar'%}{{advertiser.hours}}{% endif %}"/>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-6">
+            <label for="Imagen" class="label-login">Imagen: </label>
+            <input type="file" name="image"  class="form-control width-data-anun" value="{%if action == 'editar'%}{{advertiser.image}}{% endif %}"/>
+        </div>
+    </div>
+<input id="latitudAn" type="hidden" name="lat" class="form-control input-data-anun" data-required="true" value="{%if action == 'editar'%}{{advertiser.lat}}{% endif %}"/>
+<input id="longitudAn" type="hidden" name="lng" class="form-control input-data-anun" data-required="true" value="{%if action == 'editar'%}{{advertiser.lng}}{% endif %}"/>
+<input type="submit" id="guardar" class="btn btn-success btn-form" value="Guardar"/>
+</form>
+</div>
+{%endblock%}

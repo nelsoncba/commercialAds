@@ -1,0 +1,42 @@
+<div class="titulo-menulat"><h4>Categorías</h4></div>
+    {% for category in categories %}
+<li class="menu-item"><a href="#" title="menu"><span class="item-categoria" title="{{category.id}}">
+           {{category.name}} {%if category.id == 1 or 
+                                        category.id == 7 or
+                                        category.id == 8 or 
+                                        category.id == 15 or 
+                                        category.id == 16 %}<span class="glyphicon glyphicon-ok"></span>{%endif%}</span></a>
+            <ul class="nav nav-second-level collapse">
+                {% for subcategory in subcategories %}
+                    {%if category.id == subcategory.category.id%}
+                        {%if city and region%}
+                    <li><a class="subcat-link" href="{{path('ad_city_subcat',{ 'region':region, 'city':city, 'category':subcategory.category.slug, 'subcategory':subcategory.slug })}}"  title="{{subcategory.id}}"><span class="item-subcategoria" data-id-subcat="{{subcategory.id}}">{{subcategory.name}} {% if subcategory.id == 3 or 
+                                                                                                                                                                                                                                                 subcategory.id == 4 or
+                                                                                                                                                                                                                                                 subcategory.id == 3 or 
+                                                                                                                                                                                                                                                 subcategory.id == 43 or 
+                                                                                                                                                                                                                                                 subcategory.id == 45 or subcategory.id == 82 or subcategory.id == 83%}<span class="glyphicon glyphicon-ok"></span>{%endif%}</span></a></li>
+                        {%elseif region%}
+                            <li><a class="subcat-link" href="{{path('ad_region_subcat',{'region':region, 'category':subcategory.category.slug, 'subcategory':subcategory.slug})}}"  title="{{subcategory.id}}"><span class="item-subcategoria" data-id-subcat="{{subcategory.id}}">{{subcategory.name}} {% if subcategory.id == 3 or 
+                                                                                                                                                                                                                                                 subcategory.id == 4 or
+                                                                                                                                                                                                                                                 subcategory.id == 3 or 
+                                                                                                                                                                                                                                                 subcategory.id == 43 or 
+                                                                                                                                                                                                                                                 subcategory.id == 45 or subcategory.id == 82 or subcategory.id == 83%}<span class="glyphicon glyphicon-ok"></span>{%endif%}</span></a></li>
+                        {%elseif lat and lng%}
+                            <li><a class="subcat-link" href="{{path('near_coords_subcat',{'lat':lat, 'lng':lng, 'category':subcategory.category.slug, 'subcategory':subcategory.slug})}}"  title="{{subcategory.id}}"><span class="item-subcategoria" data-id-subcat="{{subcategory.id}}">{{subcategory.name}} {% if subcategory.id == 3 or 
+                                                                                                                                                                                                                                                                                                                subcategory.id == 4 or
+                                                                                                                                                                                                                                                                                                                subcategory.id == 3 or 
+                                                                                                                                                                                                                                                                                                                subcategory.id == 43 or 
+                                                                                                                                                                                                                                                                                                                subcategory.id == 45 or subcategory.id == 82 or subcategory.id == 83%}<span class="glyphicon glyphicon-ok"></span>{%endif%}</span></a></li>
+                        {%else%}
+                            <li><a class="subcat-link" href="{{path('ad_subcategory',{'category':subcategory.category.slug, 'subcategory':subcategory.slug})}}"  title="{{subcategory.id}}" ><span class="item-subcategoria">{{subcategory.name}} {% if subcategory.id == 3 or 
+                                                                                                                                                                                                                                                 subcategory.id == 4 or
+                                                                                                                                                                                                                                                 subcategory.id == 3 or 
+                                                                                                                                                                                                                                                 subcategory.id == 43 or 
+                                                                                                                                                                                                                                                 subcategory.id == 45 or subcategory.id == 82 or subcategory.id == 83%}<span class="glyphicon glyphicon-ok"></span>{%endif%}</span></a><div></div></li>
+                        {%endif%} 
+                   {%endif%}
+                {% endfor %}
+           </ul> 
+    </li>
+    {% endfor %}
+    

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="initial-scale=1">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/logo-mini-rojo-extra.png') }}" />
+    </head>
+    <body>
+        <!--<div id="preloader">
+            <div id="loader">
+            </div>
+        </div>-->
+        <div class="wrapper">
+        {% block body %}{% endblock %}
+                
+         <footer class="">
+            <div class="col-xs-12">&copy; {{ 'now'|date('Y') }} - LocalOfertas -</div>
+            <div class="col-xs-12"><a href="#"> Ayuda | </a>
+            <a href="#"> Contacto | </a>
+            <a href="#"> Privacidad |</a>
+            <a href="#}"> Sobre nosotros </a></div>
+        </footer>
+       </div>
+        {% block javascripts %}
+            
+        {% endblock %}
+    </body>
+</html>

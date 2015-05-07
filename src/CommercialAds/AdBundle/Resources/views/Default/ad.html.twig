@@ -1,0 +1,123 @@
+<!--<article class="banner-superior col-lg-12"></article>-->
+                <div style="display:none" class="bread-prov">{{regionSelected}}</div>
+                <div style="display:none" class="bread-local">{{citySelected}}</div>
+                <div style="display:none" class="bread-subcat">{{subcategorySelected}}</div>
+<div class="content-anuncio ">
+
+<div class="container" >
+  <div class="row">
+    <div class="header-detalle"><a href="javascript:history.go(-1);{#{%if provinciaSeleccionada or localidadSeleccionada%}{{path('avisos_localidad_subcat',{'provincia':provinciaSeleccionada,'localidad':localidadSeleccionada,'subcat':subcategoriaSeleccionada})}}{%elseif myLat and myLng%}{{path('cercanas_coords_subcat',{'lat': myLat, 'lng': myLng, 'subcat':subcategoriaSeleccionada})}}{%endif%}#}"><div class="link-detalle-voler">Volver</div></a><div class="fecha-detalle">Fecha publicación: {{ad.createdAt|date('d/m/Y')}}</div></div>
+    
+    <div class="col-xs-12 hidden-sm hidden-md hidden-lg aviso-container margenes-anuncio" >
+        <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+            <ol class="carousel-indicators">
+               <li data-target="#carousel" data-slide-to="0" class="active"></li>
+               {{ ad.image.path2 != null ? '<li data-target="#carousel" data-slide-to="1" ></li>' }}
+               {{ ad.image.path3 != null ? '<li data-target="#carousel" data-slide-to="2" ></li>' }}
+               {{ ad.image.path4 != null ? '<li data-target="#carousel" data-slide-to="3" ></li>' }}
+               {{ ad.image.path5 != null ? '<li data-target="#carousel" data-slide-to="4" ></li>' }}
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="content-image-ad "><img src="{{ad.image.path1 != null ? asset ("uploads/images/" ~ ad.image.path1) : asset ("img/img-camara.png") }}" class="img-aviso"/></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                {%if ad.image.path2%}
+                <div class="item">
+                    <div class="content-image-ad"><img src="{{ad.image.path2 != null ? asset ("uploads/images/" ~ ad.image.path2 )}}" class="img-aviso"/></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                 {%endif%}
+                 {%if ad.image.path3%}
+                <div class="item">
+                    <div class="content-image-ad"><img src="{{ad.image.path3 != null ? asset ("uploads/images/" ~ ad.image.path3 )}}" class="img-aviso"/></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                 {%endif%}
+                 {%if ad.image.path4%}
+                <div class="item">
+                    <div class="content-image-ad"><img src="{{ad.image.path4 != null ? asset ("uploads/images/" ~ ad.image.path4 )}}" class="img-aviso"/></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                 {%endif%}
+                 {%if ad.image.path5%}
+                <div class="item">
+                    <div class="content-image-ad"><img src="{{ad.image.path5 != null ? asset ("uploads/images/" ~ ad.image.path5 )}}" class="img-aviso"/></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                 {%endif%}
+            </div>
+            <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+                <span class="glyphicon icon-prev" ></span>
+            </a>
+            <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+                <span class="glyphicon icon-next" ></span>
+            </a>
+        </div>
+    </div>
+   <div class="hidden-xs col-sm-6 col-md-6 col-lg-6 aviso-container margenes-anuncio" >
+        <div class="content-image-ad">
+            <span class="img-replace"><img src="{{ ad.image.path1 != null ? asset ("uploads/images/" ~ ad.image.path1 ) : asset ("img/img-camara.png")}}" class="img-aviso"/></span>
+        </div>
+        <div class="galeria-img container-title">
+            <div class="galeria-item"><img src="{{ad.image.path1 == false ? asset ("img/img-camara.png") : asset ("uploads/images/" ~ ad.image.path1 )}}" class="img-gal" onclick="javascript:selectImg(this);"/></div>
+            <div class="galeria-item"><img src="{{ad.image.path2 == false ? asset ("img/img-camara.png") : asset ("uploads/images/" ~ ad.image.path2 )}}" class="img-gal" onclick="javascript:selectImg(this);"/></div>
+            <div class="galeria-item"><img src="{{ad.image.path3 == false ? asset ("img/img-camara.png") : asset ("uploads/images/" ~ ad.image.path3 )}}" class="img-gal" onclick="javascript:selectImg(this);"/></div>
+            <div class="galeria-item"><img src="{{ad.image.path4 == false ? asset ("img/img-camara.png") : asset ("uploads/images/" ~ ad.image.path4 )}}" class="img-gal" onclick="javascript:selectImg(this);"/></div>
+            <div class="galeria-item"><img src="{{ad.image.path5 == false ? asset ("img/img-camara.png") : asset ("uploads/images/" ~ ad.image.path5 )}}" class="img-gal" onclick="javascript:selectImg(this);"/></div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6  margenes-anuncio container-title ">
+            <div class="title-detalle ">{{ad.title}}</div>
+            <div class="precio-detalle">{{ad.typePrice != 'pesos' ? '% -' : '$ ' }} {{ad.price}}</div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 margenes-anuncio">
+           <div class="advertiser-data"><span>Anunciante: </span><span class="label label-primary" style="color:#fff;">{{ad.advertiser.name}}</span></div>
+           <div class="advertiser-data"><span>Fecha expiración:</span> {{ad.expiredAt|date('d/m/Y')}}</div>
+            <div class="advertiser-data"><span>Direccion:</span> {{ad.advertiser.street ~ ', '}}{{ad.advertiser.number ~ ', '}} {{ad.advertiser.floor}} {{ad.advertiser.door }} {{ad.advertiser.city.name ~ ', '}}{{ad.advertiser.city.region.name}}</div>
+            <div class="advertiser-data"><span>Telefono:</span> {{ad.advertiser.phone}}</div>
+            <div class="advertiser-data"><span>Horarios:</span> {{ad.advertiser.hours}}</div>
+      </div>
+      <div class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
+          <div class="btn-map hidden-xs"  style=""><a href="#mapmodals" onclick="initialize({%if  lat and lng%}{{ad.advertiser.lat}},{{ad.advertiser.lng}},{{myLat}},{{myLng}}{%else%}{{ad.advertiser.lat}},{{ad.advertiser.lng}}{%endif%});" role="button" data-toggle="modal" class="aviso-marker right"></a><span>Ver mapa</span></div>
+          <div class="btn-map hidden-sm hidden-md hidden-lg"><a href="#mapmodals" onclick="initialize({%if  lat and lng%}{{ad.advertiser.lat}},{{ad.advertiser.lng}},{{myLat}},{{myLng}}{%else%}{{ad.advertiser.lat}},{{ad.advertiser.lng}}{%endif%});" role="button" data-toggle="modal"  class="btn btn-sm btn-info"><span class="glyphicon glyphicon-map-marker"></span> Ver en mapa</a></div>
+          <input type="hidden" id="lat" value="{{ad.advertiser.lat}}"/>
+          <input type="hidden" id="lng" value="{{ad.advertiser.lng}}"/> 
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 aviso-container margenes-anuncio">
+         <div class="advertiser-data"><span>  Descripción: </span><hr></div><div class="texto-descripcion">{{ad.description}}</div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 aviso-container ">
+         <div class="advertiser-data"><span> Otros avisos del anunciante: </span><hr></div>
+         
+        <ul>
+           <div>
+                {%for ad in pagination%}
+                <div class="container aviso-mobile">
+                    <li class="">
+                        <div class="col-xs-3 aviso-container">
+                            <img src="{{ad.image.path1 != null ? asset ("uploads/images/" ~ ad.image.path1) : asset ("img/img-camara.png")}}" alt="" class="img-list-detalle"/>
+                        </div>
+                        <div class="col-xs-9  aviso-container">
+                            <div class="container-right-aviso">
+                                <a href="{%if lat and lng%}{{path('ad_by_coord', {'lat':lat, 'lng':lng, 'cat':ad.subcategory.category.slug, 'category':ad.subcategory.category.slug, 'subcategory':ad.subcategory.slug, 'slug':ad.slug})}}{%else%}{{path('ad',{'region':ad.city.region.slug,'city':ad.city.slug, 'category':ad.subcategory.category.slug, 'subcategory':ad.subcategory.slug,'slug':ad.slug  })}}{%endif%}"><div class=" aviso-mini-title">{{ad.title}}</div></a>
+                                <div class="">Publicado el {{ad.created_at|date('d/m/Y')}}</div>
+                                <div class="">{{ad.typePrice != 'pesos' ? '% -' : '$ ' }} {{ad.price}}</div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                {%endfor%}
+            </div>
+        </ul> 
+        <div class="paginator">
+          {{knp_pagination_render(pagination) }}  
+        </div>
+      </div>
+  </div>
+ </div>
+</div>

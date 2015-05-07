@@ -1,0 +1,57 @@
+{% extends 'CommercialAdsAdvertiserBundle:Default:advertiser-main.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
+{% block title %} Registro Anunciante {% endblock %}
+
+{%block advertiser%}
+         <div>{% include ':includes:flashes.html.twig' %}</div>
+            <div class="box-login">
+                <div class="titulo-menulat"><h4>Ingrese sus datos de anunciante</h4></div>
+                    <form action="{{path('advertiser_register',{'user': null})}}"  data-validate="parsley" class="form-login" method="POST">
+                        {{form_label(form.name)}}
+                        {{form_widget(form.name,{ 'attr': {'class':'form-control width-login ', 'data-required':'true'} })}}
+                        {{form_label(form.description)}}
+                        {{form_widget(form.description,{ 'attr': {'class':'form-control width-login ', 'data-trigger':'change'} })}}
+                        <label for="Provincia" class="label-login">Provincia</label>
+                        <select id="prov" class="form-control  input-sm" data-required="true">
+                            <option value="#">Selecionar provincia</option>
+                            {% for region in regions %}
+                            <option value="{{region.slug}}" data-required="true">{{region.name}}</option>
+                            {%endfor%} 
+                        </select>
+                        <label for="Localidad" class="label-login">Localidad</label>
+                        <select id="local" name="local" class="form-control  input-sm">
+                              
+                        </select>
+                        <label for="Ubicacion de anunciante" class="label-login">Ubicación de anunciante</label>
+                        <div id="map_canvas_3" class="map-registro" ></div>
+                        <input id="latitudAn" type="text" name="lat" class="form-control input-sm" data-required="true"/>
+                        <input id="longitudAn" type="text" name="lng" class="form-control input-sm" data-required="true"/>
+                        {{form_label(form.street)}}
+                        {{ form_widget(form.street, {'attr': {'class':'form-control width-login ' ,'data-required':'true' } }) }}
+                        {{form_label(form.number)}}
+                        {{ form_widget(form.number, { 'attr': {'class':'form-control width-login .numero', 'data-required':'true' } }) }}
+                        {{form_label(form.floor)}}
+                        {{ form_widget(format.floor, { 'attr': {'class':'form-control width-login '} }) }}
+                        {{form_label(form.door)}}
+                        {{ form_widget(form.door, { 'attr': {'class':'form-control width-login ' } }) }}
+                        {{form_label(form.postalCode, 'Codigo Postal')}}
+                        {{ form_widget(form.postalCode, { 'attr': {'novalidate': 'novalidate','class':'form-control width-login'} }) }}
+                        {{form_label(form.phone)}}
+                        {{ form_widget(form.phone, { 'attr': {'class':'form-control width-login ', 'data-required':'true'} }) }}
+                        {{form_label(form.hours)}}
+                        {{ form_widget(form.hours, { 'attr': {'class':'form-control width-login ', 'placeholder':'Ej. lun a vie 09 a 20 hs.', 'data-required':'true'} }) }}
+                        {{form_label(form.image)}}
+                        {{ form_widget(form.image, { 'attr': {'class':'form-control width-login '} }) }}  
+                        <input type="submit" class="btn btn-success" value="Guardar"/>
+                   </form>
+            </div>
+ {%endblock%}  
+         
+{% block javascripts %}
+     {{parent()}}
+ 
+ {% endblock %}

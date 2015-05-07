@@ -1,0 +1,25 @@
+{% extends 'CommercialAdsUserBundle:Default:user.html.twig' %}
+{% block title %} Registro {% endblock %}
+{%block user%}
+         <div>{% include ':includes:flashes.html.twig' %}</div>
+            <div class="box-login contorno">
+                <div class="titulo-menulat"><h4>Registrarse en LocalOfertas</h4></div>
+                        <form action="{{ path('user_register')}}" {{form_enctype(formulario)}} data-validate="parsley" class="form-login" method="POST">
+                            <div class="error-form">{{ form_errors(formulario) }}
+                            {{ form_errors(formulario.email) }}</div>
+                            {{form_label(formulario.user)}}
+                            {{form_widget(formulario.user,{ 'attr': {'class':'form-control width-login input-sm', 'data-parsley-trigger':'change', 'required':'true'} })}}
+                            {{form_label(formulario.email, 'Email')}}
+                            {{form_widget(formulario.email,{ 'attr': {'class':'form-control width-login input-sm', 'data-parsley-type':'email', 'data-parsley-trigger':'change', 'required':'true'} })}}
+                            {{form_label(formulario.password, 'Contraseña')}}
+                            {{ form_widget(formulario.password, {'value':'','type':'password', 'attr': {'class':'form-control width-login input-sm', 'data-parsley-trigger':'change', 'required':'true', 'data-parsley-type':'alphanum', 'min':'5', 'max':'10'} }) }}
+                            <label for="login_pass" class="label-login">Repetir Contraseña</label>
+                            <input id="passwordRe" type="password" name="passwordRe" class="form-control width-login input-sm" id="passwordRe" data-parsley-trigger="change" required="true" data-parsley-equalto="#usuariotype_password"/>   
+                            {{form_label(formulario.type, 'Usted es:')}}
+                            {{form_widget(formulario.type, { 'attr': {'class' : 'form-control width-login'} })}}
+                            {{form_rest(formulario)}}
+                            <input type="submit" class="btn btn-success" value="Registrar"/>
+                        </form>
+                <div class="form-note">Al enviar sus datos usted acepta nuestras <a href="#">reglas y condiciones</a> para el uso de este servicio. </div>
+            </div>
+ {%endblock%}    

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/src/CommercialAds/AdvertiserBundle/Entity/Advertiser.php</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/src/CommercialAds/AdBundle/DataFixtures/ORM/AdFixtures.php</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/src/CommercialAds/AdBundle/Entity/Ad.php</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/src/CommercialAds/AdBundle/Controller/DefaultController.php</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/src/CommercialAds/AdBundle/Repository/AdRepository.php</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/app/AppKernel.php</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/src/CommercialAds/AdBundle/Resources/views/Default/ads_list.html.twig</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/src/CommercialAds/FilterBundle/Entity/City.php</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/src/CommercialAds/AdBundle/Resources/config/routing.yml</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/app/config/routing.yml</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/app/Resources/views/frontend.html.twig</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/web/app.php</file>
+        <file>file:/D:/Archivos%20de%20programas/wamp/www/CommercialAds/app/Resources/views/base.html.twig</file>
+    </open-files>
+</project-private>

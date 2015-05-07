@@ -1,0 +1,7 @@
+parameters:
+#    local_ofertas_advertisers.example.class: LocalOfertas\AdvertisersBundle\Example
+
+services:
+#    local_ofertas_advertisers.example:
+#        class: %local_ofertas_advertisers.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

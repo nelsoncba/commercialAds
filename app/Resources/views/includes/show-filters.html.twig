@@ -1,0 +1,38 @@
+<div class=" col-filtros"> 
+        {% if regionSelected or citySelected or subcategorySelected or address or querySearch%}
+        <ul class="filtros-container-show col-xs-12">
+            {%if address%}<div>Filtros por mi ubicación</div>{%else%}<div>Filtros</div>{%endif%}
+            
+            <div class="filtros-container">
+                       {%if address %}
+                       <li class="filtro"><span class="filtro-address">{{address}}</span><a href="{{path('main')}}"><span>X</span></a></li>
+                       {%endif%}
+                       {%if querySearch %}
+                       <li class="filtro"><span class="filtro-querySearch">{{querySearch}}</span><a href="{%if subcategorySelected%}{{path('ad_subcategories',{'category':categorySelected, 'subcategory':subcategorySelected})}}{%else%}{{path('main')}}{%endif%}"><span>X</span></a></li>
+                       {%endif%}
+                       {%if regionSelected%}
+                            <li class="filtro"><span class="filtro-prov-nom">{{region_name}}</span><a href="{%if subcategorySelected%}{{path('ad_subcategory',{'category':categorySelected, 'subcategory':subcategorySelected})}}{%else%}{{path('main')}}{%endif%}"><span>X</span></a></li>
+                       {%endif%}
+                       {%if citySelected%}
+                            <li class="filtro"><span class="filtro-local-nom">{{city_name}}</span><a href="{%if subcategorySelected%}{{path('ad_region_subcat',{'region':regionSelected, 'category':categorySelected, 'subcategory':subcategorySelected})}}{%else%}{{path('ad_region',{'region':regionSelected})}}{%endif%}"><span>X</span></a></li>
+                       {%endif%}
+                       {%if subcategorySelected%}
+                            <li class="filtro"><span class="filtro-subcat-nom">{{subcat_name}}</span><a href="{%if lat and lng %}{{path('near_coords',{'lat':lat, 'lng':lng})}}{% elseif citySelected%}{{path('ad_city',{'region':regionSelected,'city':citySelected})}}{%elseif regionSelected%}{{path('ad_region',{'region':regionSelected})}}{%else%}{{path('main')}}{%endif%}"><span>X</span></a></li>
+                       {%endif%}
+             </div>
+        </ul>
+        {% endif %}
+        {#    {%elseif app.request.get('address')%}
+             <ul class="filtros-container-show col-xs-12">
+                <div>Filtros - Geolocalización</div>
+                <div class="filtros-container">
+                   {%if app.request.get('address')%}
+                   <li class="filtro"><span class="filtro-address">{{app.request.get('address')}}</span><a href="{{path('portada')}}"><span>X</span></a></li>
+                   {%endif%}
+                   {%if subcategorySelected%}
+                   <li class="filtro"><span>{{app.request.get('subcat_name')}}</span><a href="{%if app.request.get('address')%}{{path('portada')}}{%else%}{{path('portada')}}{%endif%}"><span>X</span></a></li>
+                   {%endif%}
+                </div>
+             </ul>
+             {% endif %} #}
+</div>

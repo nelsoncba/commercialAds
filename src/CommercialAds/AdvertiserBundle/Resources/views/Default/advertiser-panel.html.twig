@@ -1,0 +1,19 @@
+{% extends 'CommercialAdsAdvertiserBundle:Default:advertiser-main.html.twig' %}
+
+{%block advertiser%}
+    <article class="panel-principal contorno">
+        <p>Bienvenido <strong>{{advertiser.name}}</strong> a su panel de anunciante.</p>
+        
+        <p>Desde su panel de control podrá administrar sus anuncios de una manera fácil y sensilla, 
+        haga conocer su negocio publicanco las mejors ofertas para capturar la atención del público,
+        con el sistema de localización espacial logrará dar a conocer su local y con la oferta de productos 
+        y servicios tendrá la atención de potenciales clientes para hacer crecer su negocio.</p>
+        
+        <p>También puedes publicar anuncios de forma particular para vender u ofrecer productos o servicios.</p>
+                
+    </article>
+{% endblock%} 
+{% block javascripts %}
+     {{parent()}}
+ 
+ {% endblock %}

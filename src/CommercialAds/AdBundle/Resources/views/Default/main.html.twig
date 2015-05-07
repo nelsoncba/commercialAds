@@ -1,0 +1,44 @@
+{% extends  '::frontend.html.twig' %}
+{% set regionSelected = app.request.get('region') %}
+{% set citySelected = app.request.attributes.get('city') %}
+{% set categorySelected = app.request.attributes.get('category') %}
+{% set subcategorySelected = app.request.attributes.get('subcategory') %}
+{% set lat = app.request.get('lat') %}
+{% set lng = app.request.get('lng') %}
+{% set address = app.session.get('address') %}
+{% set querySearch = app.request.get('query') %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
+{% block title %}LocalOfertas{% endblock %}
+
+{% block id 'main' %}
+
+{% block aside %}
+      {% include ':includes:aside.html.twig' %} 
+{% endblock %}
+
+{% block article %}
+    {{parent()}}
+<div class="col-sm-9 col-md-9 col-lg-9 col-main">
+<article class="col-main">
+<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+    {% block filters %}
+       {% include "::includes/show-filters.html.twig"%}
+    {% endblock %}
+</div>
+
+<div id="avisos">
+     {%include 'CommercialAdsAdBundle:Default:ads_list.html.twig' %}    
+</div>
+
+</article>
+{% endblock %}
+
+{% block javascripts %}
+   {{parent()}}
+        
+{% endblock %}
+ 

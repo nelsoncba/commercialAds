@@ -1,0 +1,38 @@
+user_register:
+     pattern: /registro
+     defaults: { _controller: CommercialAdsUserBundle:Default:register }
+     
+user_login:
+     pattern: /login
+     defaults: { _controller: CommercialAdsUserBundle:Default:login }
+
+user_profile:
+     pattern: /perfil
+     defaults: { _controller: CommercialAdsUserBundle:Default:perfil }
+     
+user_registration_confirmation:
+     pattern: /confirmar-registro/{token}
+     defaults: { _controller: CommercialAdsUserBundle:Default:confirmRegistration }
+
+user_email_resetpass:
+     pattern: /email-password
+     defaults: { _controller: CommercialAdsUserBundle:Default:emailResetPass }
+
+user_reset_password:
+     pattern: /reset-password/{token}
+     defaults: { _controller: CommercialAdsUserBundle:Default:resetPassword }
+
+user_reset_pass_default:
+     pattern: /reset-password
+     defaults: { _controller: CommercialAdsUserBundle:Default:resetPassDefault }
+     
+user_register_confirmation:
+     pattern: /confirmar-registro
+     defaults: { _controller: CommercialAdsUserBundle:Default:registrationConfirmation }
+
+user_login_check:
+     pattern: /login_check
+     
+user_logout:
+     pattern: /logout
+

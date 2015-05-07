@@ -1,0 +1,15 @@
+<h5>Provincia:</h5>
+
+<li><select id="provincia" class="form-control select"  >
+    <option>Seleccione provincia</option>
+{% for region in regions %}
+    <option class="opt-prov" value="{{ region.slug }}"{%if subcategory%}data-url="{{path('ad_region_subcat', { 'region': region.slug, 'category': category, 'subcategory':subcategory })}}"{%else%}data-url="{{path('ad_region', { 'region': region.slug })}}"{%endif%}{{ currentRegion == region.slug ? 'selected="selected"' : '' }}>
+      {{ region.name }} {%if region.slug == 'cordoba' or region.slug == 'capital-federal'%}✓{%endif%}
+    </option>
+{% endfor %}
+</select></li>
+
+<script type="text/javascript">
+    
+    
+</script>

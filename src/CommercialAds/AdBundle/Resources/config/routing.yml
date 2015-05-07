@@ -1,0 +1,32 @@
+searchEngine:
+  pattern: /search
+  defaults: { _controller: CommercialAdsAdBundle:Default:search}
+  
+searchResults:
+  pattern: /resultados
+  defaults: { _controller: CommercialAdsAdBundle:Default:results}
+ 
+ad:
+  pattern: /{region}/{city}/{category}/{subcategory}/anuncio-{slug}
+  defaults: { _controller: CommercialAdsAdBundle:Default:ad, slug: ''}
+
+ad_by_coord:
+  pattern: /mi-ubicacion/{lat}/{lng}/{category}/{subcategory}/aviso-{slug}
+  defaults: { _controller: CommercialAdsAdBundle:Default:adByCoords, slug: ''}
+      
+back_to_filter:
+    pattern: /{region}/{city}/rubro-{subcat}
+    defaults: { _controller: CommercialAdsAdBundle:Default:adsByCity}
+      
+back_filters_coords:
+    pattern: /mi-ubicacion/{lat}/{lng}/{category}/{subcategory}
+    defaults: { _controller: CommercialAdsAdBundle:Default:adsCoords}
+
+my_location:
+    pattern: /mi-ubicacion
+    defaults: { _controller: CommercialAdsAdBundle:Default:adsByGeolocation}
+
+    
+
+
+    

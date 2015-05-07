@@ -1,0 +1,20 @@
+<div class="modal fade" id="resetPassDialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Enviar email para resetear contraseña.</h4>
+         </div>
+            <div class="modal-body">
+               <form action="{{ path('user_email_resetpass')}}" class="form-login" method="POST" data-validate="parsley">
+                   <label for="login_user" class="label-login">Por favor ingrese su email.</label>
+                   <input id="login_user" type="text" name="email" placeholder="email" class="form-control width-login" data-type="email" data-trigger="change" data-required="true"/>
+                   <input type="submit" class="btn btn-success" value="Enviar"/>   
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+            </div>
+      </div>
+   </div>
+</div>

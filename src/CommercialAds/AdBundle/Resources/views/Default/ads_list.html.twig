@@ -1,0 +1,77 @@
+<div class="banner-superior">
+</div>
+
+<ol class="breadcrumb hidden-xs">
+         {% if  regionSelected  %}
+           <li><a href="{%if subcategorySelected%}{{path('ad_subcategory',{'category':categorySelected , 'subcategory':subcategorySelected})}}{%else%}{{path('main')}}{%endif%}"><span class="breads">Província </span></a><span class="bread-prov">{{region_name}}</span></li>
+         {%endif%}
+         {%if citySelected%}
+           <li><a href="{%if subcategorySelected%}{{path('ad_region_subcat',{'region':regionSelected, 'category':categorySelected, 'subcategory':subcategorySelected})}}{%else%}{{path('ad_region',{'region':regionSelected})}}{%endif%}"><span class="breads">Localidad </span></a><span class="bread-local">{{city_name}}</span></li>
+         {%endif%}
+         {%if subcategorySelected%}
+           <li><a href="{%if citySelected%}{{path('ad_city',{'region':regionSelected,'city':citySelected})}}{%elseif regionSelected%}{{path('ad_region',{'region':regionSelected})}}{%else%}{{path('main')}}{%endif%}"><span class="breads">Rubro </span></a><span class="bread-subcat">{{subcat_name}}</span></li>
+         {%endif%}
+    </ol>
+                                           
+<div class=" aviso-container">
+        {%if citySelected or regionSelected%}
+            {% if citySelected%}
+            <h4>Avisos en {{city_name}}, {{region_name}}</h4>
+            {%elseif regionSelected%}
+            <h4>Avisos en {{region_name}}</h4>
+            {%else %}
+            <h4>Avisos de ofertas</h4>
+            {%endif%}
+        {%elseif app.session.get('address')%}
+            <h4>Avisos en mi zona</h4>
+        {% else  %}
+            <h4>Todos los avisos</h4>
+        {%endif%}
+        <h3><div>{% include ':includes:flashes.html.twig' %}</div></h3>
+        <ul>
+            <div class="hidden-xs">
+                {%for ad in pagination%}
+                <li class="aviso">
+                    <div class=" col-sm-2 col-md-2 col-lg-2 aviso-container col-aviso">
+                        <img src="{{ad.image.path1 != null ? asset ('uploads/images/' ~ ad.image.path1 ) : asset ("img/img-camara.png")}}" alt="" class="img-responsive img-aviso-list"/>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8 aviso-container">
+                        <div class="container-center-aviso">
+                         <div class="aviso-title"><a href="{%if lat and lng%}{{path('ad_by_coord', {'lat':ad.advertiser.lat, 'lng':ad.advertiser.lng, 'category':ad.subcategory.category.slug,'subcategory':ad.subcategory.slug, 'slug':ad.slug})}}{%else%}{{path('ad',{'region':ad.city.region.slug,'city':ad.city.slug, 'category':ad.subcategory.category.slug, 'subcategory':ad.subcategory.slug,'slug':ad.slug  })}}{%endif%}"><div class="aviso-title">{{ad.title}}</div></a></div>
+                            <div class="anunciante-container"><span class="anunciante label label-primary">{{ad.advertiser.name}}</span> - <span class="dir-calle">{{ad.advertiser.street}}</span> <span class="dir-num">{{ad.advertiser.number}}</span>, <span class="dir-city">{{ad.advertiser.city}}</span> - Tel: {{ad.advertiser.phone}} - Hr: {{ad.advertiser.hours}}</div>
+                        </div>
+                    </div>
+                   <div class="col-sm-2 col-md-2 col-lg-2 aviso-container">
+                        <div class="container-right-aviso">
+                            <div class="">{{ad.createdAt|date('d/m/Y')}}</div>
+                            <div class="content-marker"><a href="#mapmodals" onclick="initialize({%if  lat and lng%}{{ad.advertiser.lat}},{{ad.advertiser.lng}},{{lat}},{{lng}}{%else%}{{ad.advertiser.lat}},{{ad.advertiser.lng}}{%endif%});" role="button" data-toggle="modal" class="aviso-marker"></a></div>
+                            <div class="precio-anuncio">{{ad.typePrice != 'pesos' ? '% -' : '$ ' }} {{ad.price}}</div>
+                        </div>
+                    </div>
+                </li>
+                {%endfor%}
+            </div>
+            <!-- formato aviso para disp. movile -->
+          {#  <div class="col-xs-12 hidden-sm hidden-md hidden-lg aviso-container">
+                {%for ad in pagination%}
+                <div class="container aviso-mobile">
+                    <li class="">
+                        <div class="col-xs-3 aviso-container">
+                            <img src="{{ad.image == true ? asset ('uploads/images/' ~ ad.image.path1 ) : asset ("img/img-camara.png")}}" alt="" class="img-responsive img-mini-aviso-list"/>
+                        </div>
+                        <div class="col-xs-9  aviso-container">
+                            <div class="container-right-aviso">
+                                <a href="{%if lat and lng%}{{path('ad_by_coord', {'lat':ad.advertiser.lat, 'lng':ad.advertiser.lng, 'category':ad.subcategory.category.slug, 'subcategory':ad.subcategory.slug, 'slug':ad.slug})}}{%else%}{{path('aviso',{'region':ad.city.region.slug,'city':ad.city.slug, 'category':ad.subcategory.category.slug, 'subcategory':ad.subcategory.slug,'slug':ad.slug  })}}{%endif%}"><div class=" aviso-mini-title">{{ad.title}}</div></a>
+                                <div class="anunciante-mini-data "><span class="label label-primary">{{ad.advertiser.name}}</span> - {{ad.advertiser.street}} {{ad.advertiser.number}},{{ad.advertiser.city}}</div>
+                                <div class="precio-anuncio">{{ad.typePrice != 'pesos' ? '% -' : '$ ' }}{{ad.price}}</div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                {%endfor%}
+            </div>#}
+        </ul>
+        <div class="paginator">
+        {{knp_pagination_render(pagination) }}   
+        </div>
+    </div>

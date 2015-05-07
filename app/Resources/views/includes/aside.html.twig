@@ -1,0 +1,22 @@
+<div id="col-sidebar" class="hidden-xs col-sm-3 col-md-3 col-lg-3 ">
+    <nav class="navbar-default sidebar">
+        <ul class="nav" id="side-menu">
+           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                 {%block filters%}
+                         {% include ":includes:show-filters.html.twig"%}
+                 {%endblock%} 
+                   <div class="select-localizacion">                      
+                       {%if not regionSelected %}
+                                 {{ render(controller("CommercialAdsFilterBundle:Default:regionsList",{'region': regionSelected, 'category':categorySelected, 'subcategory':subcategorySelected})) }}
+                        {%endif%}
+                        {%if  regionSelected%}
+                                 {{ render(controller("CommercialAdsFilterBundle:Default:citiesList",{'region': regionSelected, 'city': citySelected, 'category':categorySelected, 'subcategory': subcategorySelected })) }} 
+                        {%endif%}
+                   </div>
+            </div>
+                {% block sidebar %}
+                       {{render(controller('CommercialAdsFilterBundle:Default:sidebar',{'region': regionSelected,'city':citySelected, 'lat':lat, 'lng':lng, 'address': address}))}}
+                {% endblock %}  
+        </ul>
+    </nav>
+</div>

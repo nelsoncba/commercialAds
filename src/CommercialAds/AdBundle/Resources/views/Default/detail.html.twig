@@ -1,0 +1,33 @@
+{% extends '::frontend.html.twig' %}
+{% set regionSelected = app.request.attributes.get('region') %}
+{% set citySelected = app.request.attributes.get('city') %}
+{% set categorySelected = app.request.attributes.get('category') %}
+{% set subcategorySelected = app.request.attributes.get('subcategory') %}
+{% set lat = app.request.get('lat') %}
+{% set lng = app.request.get('lng') %}
+{% set address = app.session.get('address')%}
+{% set querySearch = app.request.get('query') %}
+
+{% block stylesheets %}{{parent()}}{% endblock %}
+
+{% block title %}Detalle{% endblock %}
+
+{% block id 'detail' %}
+
+{% block aside %}
+      {% include ':includes:aside.html.twig' %} 
+{% endblock %}
+
+{% block article %}
+{{parent()}}
+<div class="col-sm-9 col-md-9 col-lg-9 col-main">
+<article class="detalle-contenedor">
+   {% include 'CommercialAdsAdBundle:Default:ad.html.twig' %}
+</article>
+</div>
+{% endblock %}
+ 
+{% block javascripts %}
+{{parent()}}
+
+{% endblock %}

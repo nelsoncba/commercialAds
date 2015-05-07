@@ -1,0 +1,10 @@
+parameters:
+#    localofertas_usuarios.example.class: Localofertas\UsuariosBundle\Example
+
+services:
+    login_listener:
+        class: Localofertas\UsersBundle\Listener\LoginListener
+        arguments: [@security.context, @router]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login }
+            - { name: kernel.event_listener, event: kernel.response }

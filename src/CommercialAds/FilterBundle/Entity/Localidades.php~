@@ -1,0 +1,133 @@
+<?php
+
+namespace Geoferta\SidebarBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Localidades
+ *
+ * @ORM\Table(name="localidades")
+ * @ORM\Entity(repositoryClass="Geoferta\SidebarBundle\Repository\LocalidadesRepository")
+ */
+class Localidades
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idLocalidad", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idlocalidad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="localidad", type="string", length=45, nullable=true)
+     */
+    private $localidad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=100, nullable=true)
+     */
+    private $slug;
+
+    /**
+     * @var \Provincias
+     *
+     * @ORM\ManyToOne(targetEntity="Provincias")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="provincia_id", referencedColumnName="idProvincia")
+     * })
+     */
+    private $provincia;
+
+
+
+    /**
+     * Get idlocalidad
+     *
+     * @return integer 
+     */
+    public function getIdlocalidad()
+    {
+        return $this->idlocalidad;
+    }
+
+    /**
+     * Set localidad
+     *
+     * @param string $localidad
+     * @return Localidades
+     */
+    public function setLocalidad($localidad)
+    {
+        $this->localidad = $localidad;
+    
+        return $this;
+    }
+
+    /**
+     * Get localidad
+     *
+     * @return string 
+     */
+    public function getLocalidad()
+    {
+        return $this->localidad;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Localidades
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set provincia
+     *
+     * @param \Geoferta\SidebarBundle\Entity\Provincias $provincia
+     * @return Localidades
+     */
+    public function setProvincia(\Geoferta\SidebarBundle\Entity\Provincias $provincia = null)
+    {
+        $this->provincia = $provincia;
+    
+        return $this;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return \Geoferta\SidebarBundle\Entity\Provincias 
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
+    }
+    
+    public function __toString()
+    {
+        return $this->getProvincia();
+    }
+}

@@ -1,0 +1,43 @@
+<html>
+<head>
+    <style>
+        body { font: 13px/1.5 Arial, sans-serif; }
+        ul { margin-left: .5em; padding-left: 0; }
+    </style>
+</head>
+
+<body>
+    <table cellpadding="0" cellspacing="0" style="width:100%;" width="100%">
+        <tr style="background: #FFF; color:  #cc0000; border:1px solid #ccc;">
+            <td style="padding: 1em; width: 300px;"><a href="{{path("main")}}"><img src="{{asset("img/logo10.png")}}" alt="" class="logo"></a></a></td>
+            <td style="text-align: justify; padding: 1em;"><span style="color: #ff4040; display: block; font-size: 24px;">Bienvenido a LocalOfertas.com!!</span></td>
+        </tr>
+
+        <tr style="background: #DDEBEB;">
+            <td style="padding: 10px; " colspan="2">
+                <div style="background: #FFF; border:1px solid #ccc; padding: 20px; margin-left: 200px; margin-right: 200px; ">
+                Hola Nelson, bienvenido a LocalOfertas.com!
+                <br><br>
+                Debes activar tu cuenta para completar tu registro en LocalOfertas.com y comenzar a publicar.
+                <br><br>
+                Para confirmar tu registro, haz click en el siguiente link:<br>
+                <a href="{{url('user_registration_confirmation',{'token': token})}}">http://www.localofertas.com/confirmar-registro/{{token}}</a>
+                <br><br>
+                ¡Gracias por registrarte en LocalOfertas.com!
+                <br><br><br>
+                Usted se ha registrado con los siguientes datos:<br>
+                Usuario: <span style="font-weight: bold">{{user}}</span>  <br>
+                Email:  <span style="font-weight: bold">{{email}}</span> <br>
+                Contraseña: <span style="font-weight: bold">{{password}}</span><br>
+                <br>
+                Por favor no responder este correo electrónico, ya que es un mensaje enviado de forma automática.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="color: #AAA; font-size: 13px;">
+            </td>
+        </tr>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+parameters:
+#    geoferta_sidebar.example.class: Geoferta\SidebarBundle\Example
+
+services:
+#    geoferta_sidebar.example:
+#        class: %geoferta_sidebar.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

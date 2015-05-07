@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bundles/commercialadsadvertiser/css/extranet.css') }}"rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{asset("css/bootstrap.css")}}">
+    <link rel="stylesheet" href="{{asset("css/main.css")}}">
+    <link rel="stylesheet" href="{{asset("bundles/commercialadsadvertiser/css/anunciante.css")}}">
+    <link rel="stylesheet" href="{{asset("bundles/commercialadsad/css/detalle.css")}}">
+    <link rel="stylesheet" href="{{asset("css/jquery.metisMenu.css")}}">
+    <link rel="stylesheet" href="{{asset("css/parsley/parsley.css")}}">
+    <link href="{{ asset("bundles/commercialadsad/css/lista-avisos.css") }}" type="text/css" rel="stylesheet"/>
+
+{% endblock %}
+
+{% block body %}
+    <header class="navbar-fixed-top" >
+                {%block header%}
+                    {%include ":includes:header.html.twig"%}
+                {%endblock%} 
+    </header>
+    <div class="container back-container">
+        <section class="aviso-container">
+             <div class="row">
+                 {%block aside%}
+                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg opciones"><div id="opciones" class="btn btn-info btn-xs">Ver Opciones <span class="caret"></span></div></div>
+                    <div id="sidebar-anun" class=" col-sm-3 col-md-3 col-lg-3 ">
+                        <div class="list-group sidebar">
+                           <div class="titulo-menulat"><h4>Menú de opciones</h4></div>
+                           <a href="{{path('advertiser_panel')}}" class="list-group-item" title=""><span class="glyphicon glyphicon-home"></span> Inicio</a>
+                           <a href="{{path('publish_ad')}}" class="list-group-item" title=""><span class="glyphicon glyphicon-tags"></span>  Publicar</a>
+                           <a href="{{path('advertiser_profile')}}" class="list-group-item"  title=""><span class="glyphicon glyphicon-edit"></span>  Actualizar mis datos</a>
+                           <a href="{{path('my_ads')}}" class="list-group-item" title=""><span class="glyphicon glyphicon-eye-open"></span> Ver mis publicaciones</a>
+                           <a href="{{path('user_reset_pass_default')}}" class="list-group-item" title=""><span class="glyphicon glyphicon-lock"></span> Cambiar contraseña</a>
+                           <a href="#" class="list-group-item" title=""><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
+                        </div>
+                    </div>
+                 {%endblock%} 
+                 {% block article %}
+
+                 {% endblock %}
+             </div>
+        </section>
+    </div>
+{% endblock %}
+    
+{% block javascripts %}
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.5/jquery.min.js"  type="text/javascript"></script>
+        <script> window.jQuery || document.write('<script src="{{asset('js/vendor/jquery-1.11.0.min.js')}}"><\/script>');</script>
+        <script type="text/javascript" src="{{asset("js/map.js")}}"></script>
+        <script src="{{asset("js/vendor/bootstrap.js")}}"></script> 
+        <script src="{{asset("js/jquery.metisMenu.js")}}"></script>
+        <script src="{{asset("js/parsley/parsley-standalone.min.js")}}"></script>
+        <script src="{{asset("js/parsley/parsley.extend.min.js")}}"></script>
+        <script src="{{asset("js/parsley/parsley.min.js")}}"></script>
+        <script src="{{asset("js/filestyle.js")}}"></script>
+        <script src="{{asset("js/main.js")}}"></script>
+        <script>
+            var url = '{{path('load_cities_ajax')}}';
+            var url2 = '{{path('load_subcategories_ajax')}}';
+            $('#prov').change(function(){
+                cargarLocalidades(url);
+            });
+            $('#categoria').change(function(){
+                cargarSubcategorias(url2);
+            });
+        </script>
+{% endblock %}

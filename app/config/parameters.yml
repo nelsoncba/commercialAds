@@ -1,0 +1,14 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: commercialAds
+    database_user: root
+    database_password: null
+    mailer_transport: gmail
+    mailer_host: ~
+    mailer_user: nelsonaccorsi84@gmail.com
+    mailer_password: hupusyro
+    locale: es
+    secret: a3974dac3192631010b77205219b7871032

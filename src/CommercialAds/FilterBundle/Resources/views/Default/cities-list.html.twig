@@ -1,0 +1,24 @@
+<h5>Localidad:</h5>
+<select id="city" class="form-control select"  >
+ <!--   <option value="#">Seleccione localidad</option> -->
+{% for city in cities %}
+    <option value="{{ city.slug }}"
+            {%if subcategory%}
+                 data-url="{{path('ad_city_subcat',{'region': city.region.slug,'city': city.slug, 'category':category, 'subcategory':subcategory})}}"
+            {%else%}
+                 data-url="{{path('ad_city',{'region': city.region.slug,'city': city.slug})}}"
+            {%endif%}
+            {{ currentCity == city.slug ? 'selected="selected"' : '' }}>
+        {{ city.name }} {%if city.slug == 'cordoba' or city.slug == 'belgrano'%}✓{%endif%}
+    </option>
+{% endfor %} 
+</select>
+
+<script type="text/javascript">
+    var lista = document.getElementById('city');
+
+    lista.onchange = function() {
+        var url = lista.options[lista.selectedIndex].getAttribute('data-url');
+        window.location = url;
+    };
+</script>

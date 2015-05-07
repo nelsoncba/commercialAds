@@ -1,0 +1,28 @@
+security:
+    encoders:
+        CommercialAds\UserBundle\Entity\User: sha512 
+
+    providers:
+        user:
+             entity: { class: CommercialAds\UserBundle\Entity\User, property: email}
+
+    firewalls:
+        extranet:
+            pattern:  ^/*
+            provider:  user
+            anonymous: ~
+            form-login:
+                login-path: /login
+                check-path: /login_check
+            logout:
+                path: /logout
+                invalidate_session: false
+            #anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/anunciantes/*, roles: ROLE_ADVERTISER }
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https } 

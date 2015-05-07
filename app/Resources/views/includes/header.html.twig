@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default nav-collapse">
+                        <div class="container ">           
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-2 col-md-3 col-lg-3">
+                            <div class="navbar-header">
+                            <div class="col-xs-4 sm-hidden md-hidden lg-hidden contenedor-boton">
+                                <button type="button" class="navbar-toggle toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                            <span class="sr-only">Cambiar Navegacion</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                </button>
+                            </div>
+
+                            <div class="col-xs-1 col-sm-2 col-md-3 col-lg-4 aviso-container ">
+                                  <a href="{{path("main")}}"><img src="{{asset("img/logo-demo.png")}}" alt="" class="logo"></a>
+                                 {# <a href="{{path("main")}}"><img src="{{asset("img/logo-mini-demo.png")}}" alt="" class="logo-mini"></a> #}
+                            </div>
+                          </div>
+                          </div> 
+                            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                            <div class="Col-xs-12 col-sm-5 col-md-5 col-lg-5 aviso-container">
+                                <form action="{{path('searchEngine')}}" method="get" class="navbar-form">
+                                    <div class="form-group form-search">
+                                    <input type="text" name="query" class="form-control input-search" placeholder="Buscar" value="{{ app.request.get('query') }}">
+                                    </div>
+                                    <button type="submit" class="btn button-search"><img src="{{asset("img/lupe-search.png")}}" alt="" class="img-lupe"></button>
+                                </form>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 aviso-container col-header-option">
+                                  <ul class="nav navbar-nav navbar-right ">
+                                        <li><a href="#map-cercanas" onclick="javascript:initialize(-31.416614, -64.183376);" role="button" data-toggle="modal"><span class="header-element"><b class="glyphicon glyphicon-globe"></b> Cercanas</span></a></li>
+                                        <li><a href="{{path('publish_ad')}}" class=""><span class="header-element"><b class="glyphicon glyphicon-tag"></b> Publicar</span></a></li>
+                                        {%if is_granted('ROLE_ADVERTISER') or is_granted('ROLE_USER')%}
+                                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset ("img/img-user.jpg")}}" width="30" height="30" style="border: 1px #ccc solid; margin-top: -5px; margin-bottom: -5px; border-radius: 3px,"/><b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a>{{app.user.user}}</a></li>
+                                                <li><a href="{%if is_granted('ROLE_ADVERTISER')%}{{ path('advertiser_panel')}}{%else%}{{ path('#')}}{%endif%}">Ver Perfil</a></li>
+                                                <li><a href="{{path('user_logout')}}">Cerrar</a></li>
+                                            </ul>
+                                        </li>
+                                        {%else%}
+                                        <li class=""><a href="{{path('user_login')}}" class=""><span class="header-element"><b class="glyphicon glyphicon-user"></b> Ingresar</span></a>
+                                        </li>
+                                        {%endif%}
+                                    </ul>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                    </nav>

@@ -1,0 +1,45 @@
+{% extends 'CommercialAdsAdvertiserBundle:Default:advertiser-main.html.twig' %}
+
+{%block advertiser%}
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 aviso-container ">
+         <div class="anunciante-data"><span>Listado de mis avisos</span><hr></div>
+        <ul>
+           <div>
+                {%for ad in pagination%}
+                <div class="container aviso-container ">
+                    <li class="aviso-anunciante">
+                        <div class="col-xs-3 aviso-container">
+                            <img src="{{ad.image.path1 != null ? asset ("uploads/images/" ~ ad.image.path1) : asset ("img/img-camara.png")}}" alt="" class="img-list-detalle"/>
+                        </div>
+                        <div class="col-xs-9  aviso-container">
+                            <div class="container-right-aviso">
+                                <a href="#"><div class="aviso-mini-title" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">{{ad.title}}</div></a>
+                                <div class="aviso-mini-content">Publicado el {{ad.createdAt|date('d/m/Y')}}</div>
+                                <div class="aviso-mini-content">{{ad.typePrice != 'pesos' ? '% -' : '$ ' }} {{ad.price}}</div>
+                                <div class="btn-group-aviso">
+                                    {% if ad.enabled == false or  ad.expiredAt|date('Y-m-d H:i:s') < date|date('Y-m-d H:i:s') %}
+                                    <div class="">
+                                        <a href="{{path('enable_ad',{'id': ad.id})}}" class="btn btn-xs btn-success">Publicar</a>
+                                    </div>
+                                    {% else %}
+                                    <div class="">
+                                        <a href="{{path('disable_ad',{'id': ad.id})}}" class="btn btn-xs btn-warning">Finalizar</a>
+                                    </div>
+                                    {% endif%}
+                                    <div class="">
+                                        <a href="{{path('delete_ad',{'id': ad.id})}}" class="btn btn-xs btn-danger">Eliminar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                {%endfor%}
+            </div>
+        </ul> 
+        <div class="paginator">
+          {{knp_pagination_render(pagination) }}  
+        </div>
+      </div>
+
+{%endblock%}

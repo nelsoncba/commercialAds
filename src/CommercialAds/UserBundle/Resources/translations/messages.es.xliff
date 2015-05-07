@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>The presented password cannot be empty</source>
+                <target>El campo contraseña no puede estar vacío.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Bad credentials</source>
+                <target>Combinación Usuario/clave incorrecto</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>The presented password is invalid.</source>
+                <target>Combinación Usuario/clave invalida</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>User account is disabled.</source>
+                <target>Cuenta inactiva, ingrese a su e-mail para activar.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>This value should be the user current password.</source>
+                <target>Contraseña incorrecta.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

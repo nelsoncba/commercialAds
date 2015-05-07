@@ -1,0 +1,65 @@
+<?php
+
+namespace Geoferta\SidebarBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Categorias
+ *
+ * @ORM\Table(name="categorias")
+ * @ORM\Entity
+ */
+class Categorias
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idCategoria", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idcategoria;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="categoria", type="string", length=45, nullable=true)
+     */
+    private $categoria;
+
+
+
+    /**
+     * Get idcategoria
+     *
+     * @return integer 
+     */
+    public function getIdcategoria()
+    {
+        return $this->idcategoria;
+    }
+
+    /**
+     * Set categoria
+     *
+     * @param string $categoria
+     * @return Categorias
+     */
+    public function setCategoria($categoria)
+    {
+        $this->categoria = $categoria;
+    
+        return $this;
+    }
+
+    /**
+     * Get categoria
+     *
+     * @return string 
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+}

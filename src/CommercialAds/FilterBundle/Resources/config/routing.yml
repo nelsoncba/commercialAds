@@ -1,0 +1,41 @@
+ad_subcategory:
+    pattern: /{category}/{subcategory}
+    defaults: { _controller: CommercialAdsAdBundle:Default:filteredAds}
+    
+ad_region_subcat:
+    pattern: /{region}/{category}/{subcategory}
+    defaults: { _controller: CommercialAdsAdBundle:Default:adsByRegion}
+    
+#ads_filtrados_provincia:
+#    pattern: /{provincia}/rubro-{subcat}
+#    defaults: { _controller: CommercialAdsAdBundle:Default:adsByProvincia}
+
+#ads_filtrados_localidad:
+#    pattern: /{provincia}/{localidad}/rubro-{subcat}
+#    defaults: { _controller: CommercialAdsAdBundle:Default:adsByLocalidad}
+    
+ad_city_subcat:
+    pattern: /{region}/{city}/{category}/{subcategory}
+    defaults: { _controller: CommercialAdsAdBundle:Default:adsByCity}
+
+ad_city:
+    pattern: /{region}/{city}/
+    defaults: { _controller: CommercialAdsAdBundle:Default:adsByCity, subcategory: ''}
+
+ad_region:
+    pattern: /{region}
+    defaults: { _controller: CommercialAdsAdBundle:Default:adsByRegion, subcategory: ''}
+    
+near_coords:
+    pattern: /mi-ubicacion/{lat}/{lng}/
+    defaults: { _controller: CommercialAdsAdBundle:Default:adsCoords, subcategory: null}
+    
+near_coords_subcat:
+    pattern: /mi-ubicacion/{lat}/{lng}/{category}/{subcategory}
+    defaults: { _controller: CommercialAdsAdBundle:Default:adsCoords}
+    
+#volver_mi_ubicacion:
+#    pattern: /mi-ubicacion/{address}/{lat}/{lng}
+#    defaults: { _controller: CommercialAdsAdBundle:Default:adsCoordsSubcat}
+
+  

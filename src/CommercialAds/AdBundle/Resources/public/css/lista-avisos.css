@@ -1,0 +1,333 @@
+.banner-superior{
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   margin-bottom: 10px;
+}
+.breads{
+    color:#069BAC;
+}
+.aviso-container{
+    padding-left: 1px;
+    padding-right: 1px;
+}
+.aviso{
+    height: 120px;  
+    border: solid 1px  #C8CFD0; 
+    margin-bottom: 5px; 
+    box-shadow: 1px 1px 1px #C8CFD0; 
+    padding: 8px;
+}
+.aviso:hover{
+    background: rgb(200, 241, 255);
+    background: -moz-linear-gradient(272deg, rgb(200, 241, 255) 4%, rgb(239, 255, 255) 37%);
+    background: -webkit-linear-gradient(272deg, rgb(200, 241, 255) 4%, rgb(239, 255, 255) 37%);
+    background: -o-linear-gradient(272deg, rgb(200, 241, 255) 4%, rgb(239, 255, 255) 37%);
+    background: -ms-linear-gradient(272deg, rgb(200, 241, 255) 4%, rgb(239, 255, 255) 37%);
+    background: linear-gradient(2deg, rgb(200, 241, 255) 4%, rgb(239, 255, 255) 37%);
+    border: solid 1px  #9CAFB1; box-shadow: 1px 1px 1px #9CAFB1;
+}
+.aviso-mobile{
+    border: solid 1px  #C8CFD0; 
+    margin-bottom: 5px; 
+    padding: 5px;
+}
+.container-center-aviso{
+    height: 90px; width: auto; padding-left:10px;
+}
+.container-right-aviso{
+    padding-left: 10px;
+}
+.img-aviso-list{
+   margin-right: 2px;
+   border: solid 1px  #C8CFD0; 
+   width: 100px;
+   height: 100px;
+}
+.img-mini-aviso-list{
+   border: solid 1px  #C8CFD0; 
+}
+.aviso-title{  
+   font-weight: bold; 
+   font-size: 18px;
+}
+.aviso-title, .aviso-mini-title, .breads:hover, h4{
+   color: #4A6B6E;
+}
+.aviso-mini-title{
+ /*  overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis; */
+   margin-top: 0px;
+   font-weight: bold; 
+   font-size: 14px;
+   margin-top: 0;
+   overflow:hidden;
+   white-space:nowrap;
+   text-overflow: ellipsis;
+}
+.anunciante-container{
+    margin-top:10px;
+}
+.content-marker{
+    width: 50px; 
+    height: 50px; 
+    border: 1px #08C; 
+    float: right; 
+    text-align: center;
+}
+.aviso-marker{
+    display: block; 
+    width: 45px; 
+    height: 45px; 
+    background: url("../images/aviso-marker-2.png")no-repeat center; 
+    background-size: 30px 30px;  
+    vertical-align: middle;
+}
+.aviso-marker:hover{
+    background: url("../images/aviso-marker.png")no-repeat center; 
+    background-size: 30px 30px; 
+    -webkit-transition: 500ms ease-in-out; 
+    -moz-transition: 3s ease-in-out; 
+    -moz-transition-property: all;
+}
+.anunciante-mini-data{
+    font-size: 14px;
+    margin-top: 2px;
+}
+.precio-anuncio{
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.pagination {float: right; margin-top: 8px;}
+.pagination span a{background-color: #95AAAC; border: 1px solid #95AAAC; color: #FFFFFF; padding: 2px; font-size: 16px; border-radius: 2px;}
+.pagination span.current{border: 1px solid #95AAAC; font-size: 16px; border-radius: 2px; color: #95AAAC; padding: 2px;}
+.pagination span a:hover{background-color: #687678; border: 1px solid #687678;}
+
+#mapmodals label { width: auto!important; display:inline!important; }
+#mapmodals img { max-width: none!important; }
+#map_canvas {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+}
+.map{
+      width:540px;
+      height: 350px;
+      border: 1px solid #ccc;   
+}
+.body-map{
+    height: 365px;
+}
+#map-cercanas .map{
+    height: 80%;   
+}
+.img-localization-1, .img-localization-2{
+    width: 30px;
+    height: 30px;
+}
+.img-localization-2{
+display: none;
+}
+.input-address{
+    width: 350px;
+}
+#btn-form-cercanas{
+    margin-top: 3px;
+}
+.rpta-geosearch{
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   color: #398439;
+   position: relative;
+   background-color: #fff;
+   top: -30px;
+   padding-left: 3px;
+   margin-left: 3px;
+   margin-right: 3px;
+}
+@media screen and (max-width: 769px){
+    .breads, .bread-prov, .bread-local, .bread-subcat{
+        font-size: 10px;
+    }
+    .banner-superior{
+        height: 50px;
+    }
+    #form_mapa{
+        margin: 1px 1px;
+    }
+}
+@media screen and (max-width: 991px){
+    #form_mapa{
+        margin: 1px 1px;
+    }
+    .body-map{
+        padding-top:10px;
+    }
+    .navbar-form{
+        display: inline-block;
+    }
+}
+@media screen and (max-width: 768px){
+    .modal-dialog{
+        width: 550px;
+    }
+    .map {
+      width:490px;
+      height: 300px;
+    }
+    .back-container{
+        width: 95%;
+    }
+    .precio-anuncio{
+        margin-top: 5px;
+        margin-right: 10px;
+        float: right;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .img-mini-aviso-list{
+        margin: 3px 2px;
+    }
+    #form_mapa{
+        margin: 1px 1px;
+    }
+}
+@media (min-width: 767px) and (max-width: 991px){
+  .input-search, .input-address{
+      width: 170px;
+  }
+  .glyphicon{
+      display: none;
+  }
+  .col-header-option{
+      width: 300px;
+  }
+  .navbar-form{
+      display: inline-block;
+  }
+}
+
+@media screen and (max-width: 560px){
+    .modal-dialog{
+        width: 440px;
+    }
+    .map {
+      margin-bottom: 2px;
+      margin-top: 0px;
+      width:380px;
+      height: 300px;
+    }
+    .body-map{
+        padding-top: 10px;
+        height: 360px;
+    }
+    .navbar-form{
+        display: inline-block;
+    }
+    #form_mapa{
+        margin: 1px 1px;
+    }
+    .aviso-mini-title{
+      margin-top: 0;
+      font-weight: bold; 
+      font-size: 12px;
+    }
+    .aviso-mini-content{
+        font-size:12px;
+    }
+}
+@media screen and (max-width: 460px){
+    .modal-dialog{
+        width: 365px;
+    }
+    .map {
+      margin-bottom: 2px;
+      margin-top: 0px;
+      width:300px;
+      height: 300px;
+    }
+    .input-address, .form-mapa{
+        width: 220px;
+    }
+    .body-map{
+        padding-top: 10px;
+        height: 350px;
+    }
+    #form_mapa{
+        margin: 1px 1px;
+    }
+    .map-registro{
+        width: 230px;
+        height: 230px;
+    }
+}
+@media screen and (max-width: 369px){
+    .modal-dialog{
+        width: 310px;
+        height: auto;
+    }
+    .map {
+      margin-bottom: 2px;
+      margin-top: 0px;
+      width:250px;
+      height: 240px;
+    }
+    .body-map{
+        padding-top: 10px;
+        height: 260px;
+    }
+    #form_mapa{
+        margin: 1px 1px;
+    }
+    .map-registro{
+        width: 230px;
+        height: 230px;
+    }
+}
+@media screen and (max-width: 320px){
+    .modal-dialog{
+        width: 300px;
+        height: 500px;
+    }
+    .map{
+        margin-bottom: 1px;
+        width: 240px;
+        height: 240px;
+    }
+    .body-map{
+        padding-top: 10px;
+        height: 300px;
+    }
+    .input-address{
+        width: 200px;
+    }
+    .map-registro{
+        width: 230px;
+        height: 230px;
+    }
+    
+}
+@media screen and (max-width: 992px){
+    .aviso-title{
+        font-size:16px;
+    }
+    .anunciante-container{
+        font-size: 12px;
+        margin-top: 2px;
+    }
+    .precio-anuncio{
+        font-size: 14px;
+    }
+    img.logo{
+        display: none;
+    }
+}
+@media screen and (min-width: 993px){
+    img.logo-mini{
+        display: none;
+    }
+}
