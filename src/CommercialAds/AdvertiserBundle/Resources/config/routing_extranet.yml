@@ -1,54 +1,47 @@
-advertiser_register:
-    pattern: /registro
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:registration, user: ''}
- 
-load_cities_ajax:
-    pattern: /cargar-localidades
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:loadCities}
+#advertiser_register:
+#    pattern: /registro
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:registration, user: ''}
+# 
+#load_cities_ajax:
+#    pattern: /api/citiesList/{region}
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:loadCities}
+#    requirements:
+#        _format: json
+#        _method: GET
 
-load_subcategories_ajax:
-    pattern: /cargar-subcategorias
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:loadSubcategories}
-    
-advertiser_panel:
-    pattern: /panel
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:panel}
-
-advertiser_profile:
-    pattern: /datos-perfil
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:advertiserProfile}
-
-publish_ad:
-    pattern: /publicar
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:publishAd}
-
-enable_ad:
-    pattern: /publicar-{id}
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:enable}
-
-my_ads:
-    pattern: /mis-anuncios
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:panelAds}
-    
-disable_ad:
-    pattern: /desactivar-{id}
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:disable}
-    
-delete_ad:
-    pattern: /eliminar-{id}
-    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:deleteAd}
-    
-#extranet_aviso_nuevo:
-#    pattern: /aviso/nuevo
-#    defaults: { _controller: CommercialAdsAdvertiserBundle:Extranet:avisoNuevo}
+#load_subcategories_ajax:
+#    pattern: /cargar-subcategorias
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:loadSubcategories}
 #    
-#extranet_aviso_editar:
-#    pattern: /aviso/editar/{id}
-#    defaults: { _controller: CommercialAdsAdvertiserBundle:Extranet:avisoEditar}
+#advertiser_panel:
+#    pattern: /panel
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:panel}
+#
+#advertiser_profile:
+#    pattern: /datos-perfil
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:advertiserProfile}
+#
+#publish_ad:
+#    pattern: /publicar
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:publishAd}
+#
+#enable_ad:
+#    pattern: /publicar-{id}
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:enable}
+#
+#my_ads:
+#    pattern: /mis-anuncios
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:panelAds}
 #    
-#extranet_perfil:
-#    pattern: /perfil
-#    defaults: { _controller: CommercialAdsAdvertiserBundle:Extranet:perfil}
+#disable_ad:
+#    pattern: /desactivar-{id}
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:disable}
+#    
+#delete_ad:
+#    pattern: /eliminar-{id}
+#    defaults: { _controller: CommercialAdsAdvertiserBundle:Default:deleteAd}
+    
+
     
 
 

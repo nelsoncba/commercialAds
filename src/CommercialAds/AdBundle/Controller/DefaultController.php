@@ -7,28 +7,28 @@ use CommercialAds\adBundle\Util\Util;
 
 class DefaultController extends Controller
 {
-    public function indexAction($region){   
-       $this->getRequest()->getSession()->remove('address');
-       $this->getRequest()->getSession()->remove('lat');
-       $this->getRequest()->getSession()->remove('lng');
-         
-       $myaddress = null;
+    public function indexAction(){   
+//       $this->getRequest()->getSession()->remove('address');
+//       $this->getRequest()->getSession()->remove('lat');
+//       $this->getRequest()->getSession()->remove('lng');
+//         
+//       $myaddress = null;
+//       
+//       $em = $this->getDoctrine()->getManager();        
+//      
+//       $ads = $em->getRepository("CommercialAdsAdBundle:Ad")->findAds();
+//      
+//       if(!$ads) 
+//             $this->get('session')->getFlashBag()->add('infoAds','No existen avisos para los filtros seleccionados.'); 
+//
+//       $paginator = $this->get('knp_paginator');
+//       $pagination = $paginator->paginate($ads, $this->get('request')->query->get('page',1),20);
+//       
+//       $response = $this->render('CommercialAdsAdBundle:Default:main.html.twig', array('pagination' => $pagination,
+//                                                                                       'myaddress' => $myaddress));
+//       $response->setSharedMaxAge(600);  
        
-       $em = $this->getDoctrine()->getManager();        
-      
-       $ads = $em->getRepository("CommercialAdsAdBundle:Ad")->findAds();
-      
-       if(!$ads) 
-             $this->get('session')->getFlashBag()->add('infoAds','No existen avisos para los filtros seleccionados.'); 
-
-       $paginator = $this->get('knp_paginator');
-       $pagination = $paginator->paginate($ads, $this->get('request')->query->get('page',1),20);
-       
-       $response = $this->render('CommercialAdsAdBundle:Default:main.html.twig', array('pagination' => $pagination,
-                                                                                       'myaddress' => $myaddress));
-       $response->setSharedMaxAge(600);  
-       
-       return $response;
+       return $this->render('::index.html.php');
 
     }
     
@@ -49,21 +49,25 @@ class DefaultController extends Controller
     }
     
     public function adAction($city,$slug){
-
+         $serializer = $this->container->get('serializer');
         $em = $this->getDoctrine()->getManager();
         $resp_city = $em->getRepository("CommercialAdsFilterBundle:City")->findOneBySlug($city);
         
         if($city && $slug){ 
                $ad = $em->getRepository("CommercialAdsAdBundle:Ad")->findAd($resp_city,$slug);
+               
+              throw $this->createNotFoundException(' '.$serializer->serialize($ad, 'json'));
+
                if($ad)
                     $otherAds = $em->getRepository("CommercialAdsAdBundle:Ad")->findByAdvertiserAndSlug($ad->getAdvertiser(),$ad->getSlug());
                else
                     throw $this->createNotFoundException('Opss!! La página solicitada no está disponible.alfa');
         }else
-             throw $this->createNotFoundException('Opss!! La página solicitada no está disponible.beta');
+             throw $this->createNotFoundException('Opss!! La página solicitada no está disponible.');
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($otherAds, $this->get('request')->query->get('page',1),20);
+        
         return $this->render('CommercialAdsAdBundle:Default:detail.html.twig', array('ad' => $ad,
                                                                                    'pagination'=>$pagination,
                                                                                     'region_name' => $resp_city->getRegion()->getName(),
@@ -116,7 +120,7 @@ class DefaultController extends Controller
              if($reg)
                 $ads = $em->getRepository("CommercialAdsAdBundle:Ad")->findByRegion($reg,null);
              else
-                throw $this->createNotFoundException('Opss!! la página no está disponible por el momento.'.$region); 
+                throw $this->createNotFoundException('Opss!! la página no está disponible por el momento.'); 
          }
          
          if(!$ads) 

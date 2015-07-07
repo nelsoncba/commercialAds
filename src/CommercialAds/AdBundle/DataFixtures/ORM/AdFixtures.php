@@ -21,13 +21,19 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     public function load(ObjectManager $manager) {
         
         $em = $this->container->get('doctrine')->getManager();
-        
+        $region2 = $em->getRepository('CommercialAdsFilterBundle:Region')->findOneById(2);
+        $region6 = $em->getRepository('CommercialAdsFilterBundle:Region')->findOneById(6);
         $city152 = $em->getRepository('CommercialAdsFilterBundle:City')->findOneById(152);
         $city250 = $em->getRepository('CommercialAdsFilterBundle:City')->findOneById(250);
+        $category15 = $em->getRepository('CommercialAdsFilterBundle:Category')->findOneById(15);
         $subcategory82 = $em->getRepository('CommercialAdsFilterBundle:Subcategory')->findOneById(82);
+        $category1 = $em->getRepository('CommercialAdsFilterBundle:Category')->findOneById(1);
         $subcategory3 = $em->getRepository('CommercialAdsFilterBundle:Subcategory')->findOneById(3);
+        $category7 = $em->getRepository('CommercialAdsFilterBundle:Category')->findOneById(7);
         $subcategory43 = $em->getRepository('CommercialAdsFilterBundle:Subcategory')->findOneById(43);
+        $category16 = $em->getRepository('CommercialAdsFilterBundle:Category')->findOneById(16);
         $subcategory83 = $em->getRepository('CommercialAdsFilterBundle:Subcategory')->findOneById(83);
+        $category8 = $em->getRepository('CommercialAdsFilterBundle:Category')->findOneById(8);
         $subcategory45 = $em->getRepository('CommercialAdsFilterBundle:Subcategory')->findOneById(45);
         $advertiser13 = $em->getRepository('CommercialAdsAdvertiserBundle:Advertiser')->findOneById(13);
         $advertiser14 = $em->getRepository('CommercialAdsAdvertiserBundle:Advertiser')->findOneById(14);
@@ -36,14 +42,16 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $advertiser9 = $em->getRepository('CommercialAdsAdvertiserBundle:Advertiser')->findOneById(9);
         
         
-       for ($i=0; $i<50; $i++) {
+       for ($i=0; $i<5; $i++) {
            $mes = rand(5, 10);
            $dia = rand(1, 10);
         $image1 = new Image();
         $ad = new Ad();
+        $ad->setRegion($region2);
         $ad->setCity($city152);
+        $ad->setCategory($category8);
         $ad->setSubcategory($subcategory45);
-        $ad->setTitle('Promocion 2 pen drive 8 GB x $120!!');
+        $ad->setTitle('Promocion 2 pen drive 8 GB x $120 '.$i.'!!');
         $ad->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra.');
         $ad->setTypePrice('pesos');
         $ad->setPrice(120);
@@ -51,21 +59,23 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $ad->setImage($image1);
         $ad->setCreatedAt("2014-".$mes."-".$dia." 06:15:53");
         $ad->setAdvertiser($advertiser13);
-        $ad->setSlug('promocion-2-pen-drive-8-gb-x-120');
+        $ad->setSlug('promocion-2-pen-drive-8-gb-x-120-'.$i.'');
         $image1->setAd($ad);
         $image1->setPath1('pendrive1.jpg');
         $image1->setPath2('pendrive2.jpg');
         $manager->persist($ad);
        }
        
-       for ($i=0; $i<50; $i++) {
+       for ($i=0; $i<5; $i++) {
            $mes = rand(5, 10);
            $dia = rand(1, 10);
         $image2 = new Image();
         $ad = new Ad();
+        $ad->setRegion($region2);
         $ad->setCity($city152);
+        $ad->setCategory($category15);
         $ad->setSubcategory($subcategory82);
-        $ad->setTitle('Hoy porción de lasagna 20% de descuento promocional');
+        $ad->setTitle('Hoy porción de lasagna 20% de descuento promocional '.$i.'');
         $ad->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra.');
         $ad->setTypePrice('porcentaje');
         $ad->setPrice(20);
@@ -73,20 +83,22 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $ad->setImage($image2);
         $ad->setCreatedAt("2014-".$mes."-".$dia." 06:27:53");
         $ad->setAdvertiser($advertiser14);
-        $ad->setSlug('hoy-porcion-de-lasagna-20-de-descuento-promocional');
+        $ad->setSlug('hoy-porcion-de-lasagna-20-de-descuento-promocional-'.$i.'');
         $image2->setAd($ad);
         $image2->setPath1('lasagna1.jpg');
         $manager->persist($ad);
        }
        
-       for ($i=0; $i<200; $i++) {
+       for ($i=0; $i<5; $i++) {
            $mes = rand(5, 10);
            $dia = rand(1, 10);
         $image3 = new Image();
         $ad = new Ad();
+        $ad->setRegion($region6);
         $ad->setCity($city250);
+        $ad->setCategory($category1);
         $ad->setSubcategory($subcategory3);
-        $ad->setTitle('Mix de frutas en oferta, aprovecha el descuento!!');
+        $ad->setTitle('Mix de frutas en oferta, aprovecha el descuento '.$i.'!!');
         $ad->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra.');
         $ad->setTypePrice('porcentaje');
         $ad->setPrice(10);
@@ -94,7 +106,7 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $ad->setImage($image3);
         $ad->setCreatedAt("2014-".$mes."-".$dia." 06:40:53");
         $ad->setAdvertiser($advertiser7);
-        $ad->setSlug('mix-de-frutas-en-oferta-aprovecha-el-descuento');
+        $ad->setSlug('mix-de-frutas-en-oferta-aprovecha-el-descuento-'.$i.'');
         $image3->setAd($ad);
         $image3->setPath1('frutas1.jpg');
         $image3->setPath2('frutas2.jpg');
@@ -103,14 +115,16 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $manager->persist($ad);
        }
        
-       for ($i=0; $i<200; $i++) {
+       for ($i=0; $i<5; $i++) {
            $mes = rand(5, 10);
            $dia = rand(1, 10);
         $image4 = new Image();
         $ad = new Ad();
+        $ad->setRegion($region6);
         $ad->setCity($city250);
+        $ad->setCategory($category7);
         $ad->setSubcategory($subcategory43);
-        $ad->setTitle('Zapatillas Adidas, con descuento esta semana!!');
+        $ad->setTitle('Zapatillas Adidas, con descuento esta semana '.$i.'!!');
         $ad->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra.');
         $ad->setTypePrice('porcentaje');
         $ad->setPrice(15);
@@ -118,7 +132,7 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $ad->setImage($image4);
         $ad->setCreatedAt("2014-".$mes."-".$dia." 06:40:53");
         $ad->setAdvertiser($advertiser8);
-        $ad->setSlug('zapatillas-adidas-con-descuento-esta-semana');
+        $ad->setSlug('zapatillas-adidas-con-descuento-esta-semana-'.$i.'');
         $image4->setAd($ad);
         $image4->setPath1('zapatillas1.jpg');
         $image4->setPath2('zapatillas2.jpg');
@@ -127,14 +141,16 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $manager->persist($ad);
        }
        
-       for ($i=0; $i<200; $i++) {
+       for ($i=0; $i<5; $i++) {
            $mes = rand(5, 10);
            $dia = rand(1, 10);
         $image5 = new Image();
         $ad = new Ad();
+        $ad->setRegion($region6);
         $ad->setCity($city250);
+        $ad->setCategory($category16);
         $ad->setSubcategory($subcategory83);
-        $ad->setTitle('Plasma TV 32`` a solo $3000!!');
+        $ad->setTitle('Plasma TV 32`` a solo $3000 '.$i.'!!');
         $ad->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra.');
         $ad->setTypePrice('pesos');
         $ad->setPrice(3000);
@@ -142,7 +158,7 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $ad->setImage($image5);
         $ad->setCreatedAt("2014-".$mes."-".$dia." 06:40:53");
         $ad->setAdvertiser($advertiser9);
-        $ad->setSlug('plasma-tv-32-a-solo-3000');
+        $ad->setSlug('plasma-tv-32-a-solo-3000-'.$i.'');
         $image5->setAd($ad);
         $image5->setPath1('plasma1.jpg');
         $image5->setPath2('plasma2.jpg');
@@ -150,14 +166,16 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $manager->persist($ad);
        }
        
-       for ($i=0; $i<100; $i++) {
+       for ($i=0; $i<5; $i++) {
            $mes = rand(5, 10);
            $dia = rand(1, 10);
         $image6 = new Image();
         $ad = new Ad();
+        $ad->setRegion($region6);
         $ad->setCity($city250);
+        $ad->setCategory($category16);
         $ad->setSubcategory($subcategory83);
-        $ad->setTitle('Oferta 25% de descuento en Heladera');
+        $ad->setTitle('Oferta 25% de descuento en Heladera '.$i.'');
         $ad->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra.');
         $ad->setTypePrice('porcentaje');
         $ad->setPrice(25);
@@ -165,21 +183,23 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $ad->setImage($image6);
         $ad->setCreatedAt("2014-".$mes."-".$dia." 06:40:53");
         $ad->setAdvertiser($advertiser9);
-        $ad->setSlug('oferta-20-de-descuento-en-heladera');
+        $ad->setSlug('oferta-20-de-descuento-en-heladera-'.$i.'');
         $image6->setAd($ad);
         $image6->setPath1('heladera1.jpg');
         $image6->setPath2('heladera2.jpg');
         $manager->persist($ad);
        }
        
-       for ($i=0; $i<50; $i++) {
+       for ($i=0; $i<5; $i++) {
            $mes = rand(5, 10);
            $dia = rand(1, 10);
         $image7 = new Image();
         $ad = new Ad();
+        $ad->setRegion($region2);
         $ad->setCity($city152);
+        $ad->setCategory($category15);
         $ad->setSubcategory($subcategory82);
-        $ad->setTitle('Esta semana 10% de descuento en 2 platos de pastas');
+        $ad->setTitle('Esta semana 10% de descuento en 2 platos de pastas '.$i.'');
         $ad->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra.');
         $ad->setTypePrice('porcentaje');
         $ad->setPrice(10);
@@ -187,20 +207,22 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $ad->setImage($image7);
         $ad->setCreatedAt("2014-".$mes."-".$dia." 06:40:53");
         $ad->setAdvertiser($advertiser14);
-        $ad->setSlug('esta-semana-10-de-descuento-en-2-platos-de-pastas');
+        $ad->setSlug('esta-semana-10-de-descuento-en-2-platos-de-pastas-'.$i.'');
         $image7->setAd($ad);
         $image7->setPath1('ravioles1.jpg');
         $manager->persist($ad);
        }
        
-       for ($i=0; $i<50; $i++) {
+       for ($i=0; $i<5; $i++) {
            $mes = rand(5, 10);
            $dia = rand(1, 10);
         $ad = new Ad();
         $image8 = new Image();
+        $ad->setRegion($region2);
         $ad->setCity($city152);
+        $ad->setCategory($category8);
         $ad->setSubcategory($subcategory45);
-        $ad->setTitle('Promocion 1 disco rigido 8 TB x $250!!');
+        $ad->setTitle('Promocion 1 disco rigido 8 TB x $250 '.$i.'!!');
         $ad->setDescription('Casa computación');
         $ad->setTypePrice('pesos');
         $ad->setPrice(250);
@@ -208,7 +230,7 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $ad->setImage($image8);
         $ad->setCreatedAt("2013-10-".$mes."-".$dia." 06:15:53");
         $ad->setAdvertiser($advertiser13);
-        $ad->setSlug('promocion-1-disco-rigido-8-Tb-x-250');
+        $ad->setSlug('promocion-1-disco-rigido-8-Tb-x-250-'.$i.'');
         $image8->setAd($ad);
         $image8->setPath1('discorigido1.jpg');
         $image8->setPath2('discorigido2.jpg');
@@ -220,9 +242,11 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
            $dia = rand(1, 10);
         $ad = new Ad();
         $image9 = new Image();
+        $ad->setRegion($region2);
         $ad->setCity($city152);
+        $ad->setCategory($category8);
         $ad->setSubcategory($subcategory45);
-        $ad->setTitle('1 año en descuentos en compras mayores a 500 pesos !! ');
+        $ad->setTitle('1 año en descuentos en compras mayores a 500 pesos '.$i.'!! ');
         $ad->setDescription('Solo por esta semana se permiará con un año de descuentos en productos......');
         $ad->setTypePrice('porcentaje');
         $ad->setPrice(8);
@@ -230,7 +254,7 @@ class DataFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $ad->setImage($image9);
         $ad->setCreatedAt("2014-10-".$mes."-".$dia." 06:15:53");
         $ad->setAdvertiser($advertiser13);
-        $ad->setSlug('1-año-en-descuentos-en-compras-mayores-a-500-pesos');
+        $ad->setSlug('1-año-en-descuentos-en-compras-mayores-a-500-pesos-'.$i.'');
         $image9->setAd($ad);
         $manager->persist($ad);
        }

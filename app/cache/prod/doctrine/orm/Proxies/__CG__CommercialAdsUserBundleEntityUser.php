@@ -147,6 +147,18 @@ class User extends \CommercialAds\UserBundle\Entity\User implements \Doctrine\OR
         return parent::getType();
     }
 
+    public function setCreatedAt()
+    {
+        $this->__load();
+        return parent::setCreatedAt();
+    }
+
+    public function getCreatedAt()
+    {
+        $this->__load();
+        return parent::getCreatedAt();
+    }
+
     public function eraseCredentials()
     {
         $this->__load();

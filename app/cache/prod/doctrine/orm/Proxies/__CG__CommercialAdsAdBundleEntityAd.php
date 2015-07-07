@@ -171,6 +171,18 @@ class Ad extends \CommercialAds\AdBundle\Entity\Ad implements \Doctrine\ORM\Prox
         return parent::getAdvertiser();
     }
 
+    public function setRegion(\CommercialAds\FilterBundle\Entity\Region $region = NULL)
+    {
+        $this->__load();
+        return parent::setRegion($region);
+    }
+
+    public function getRegion()
+    {
+        $this->__load();
+        return parent::getRegion();
+    }
+
     public function setCity(\CommercialAds\FilterBundle\Entity\City $city = NULL)
     {
         $this->__load();
@@ -181,6 +193,18 @@ class Ad extends \CommercialAds\AdBundle\Entity\Ad implements \Doctrine\ORM\Prox
     {
         $this->__load();
         return parent::getCity();
+    }
+
+    public function setCategory(\CommercialAds\FilterBundle\Entity\Category $category = NULL)
+    {
+        $this->__load();
+        return parent::setCategory($category);
+    }
+
+    public function getCategory()
+    {
+        $this->__load();
+        return parent::getCategory();
     }
 
     public function setSubcategory(\CommercialAds\FilterBundle\Entity\Subcategory $subcategory = NULL)
@@ -228,7 +252,7 @@ class Ad extends \CommercialAds\AdBundle\Entity\Ad implements \Doctrine\ORM\Prox
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'title', 'description', 'price', 'typePrice', 'enabled', 'slug', 'created_at', 'expired_at', 'type', 'image', 'advertiser', 'subcategory', 'city');
+        return array('__isInitialized__', 'id', 'title', 'description', 'price', 'typePrice', 'enabled', 'slug', 'created_at', 'expired_at', 'type', 'image', 'advertiser', 'category', 'subcategory', 'region', 'city');
     }
 
     public function __clone()

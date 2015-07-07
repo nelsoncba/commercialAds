@@ -76,7 +76,7 @@ class DefaultController extends Controller
         return $this->render('CommercialAdsAdvertiserBundle:Default:publish-ad.html.twig', array('action' => null,
                                                                                                        'categories' => $categories));
     }
-    
+   
     public function registrationAction(){   
         $user = $this->get('security.context')->getToken()->getUser();
         $request = $this->getRequest();
@@ -102,7 +102,7 @@ class DefaultController extends Controller
 
         }
         
-        return $this->render('CommercialAdsAdvertiserBundle:Default:advertiser-profile.html.twig', array('regions'=>$regions, 'action'=>null, 'advertiser'=>null, 'form' => $form->createView()));
+        return new JsonResponse(array('regions'=>null, 'action'=>null, 'advertiser'=>null, 'form' => $form->createView()));
     }
     
     public function loadCitiesAction(){

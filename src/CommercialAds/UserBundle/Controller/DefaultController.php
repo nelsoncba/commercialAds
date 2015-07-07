@@ -10,6 +10,7 @@ use CommercialAds\UserBundle\Form\Frontend\ResetPasswordType;
 use CommercialAds\UserBundle\Form\Frontend\ResetPassDefaultType;
 use CommercialAds\UserBundle\Form\Model\ChangePassword;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Monolog\Handler\MailHandler;
 
 class DefaultController extends Controller
 {
@@ -50,7 +51,6 @@ class DefaultController extends Controller
             $em->flush();
             
             /*send confirmation mail*/
-            
             $message = \Swift_Message::newInstance()
                         ->setSubject('Confirmación de registro.')
                         ->setFrom('noreply@localofertas.com')

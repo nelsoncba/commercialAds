@@ -11,12 +11,9 @@ class CityRepository extends EntityRepository{
                          ->select("c")
                          ->leftJoin("c.region", "r")
                          ->where("r.slug = :region")
-                         ->setParameter("region", $region);
-                         
-                         
+                         ->setParameter("region", $region);                                             
         
-        return $cities->getQuery()
-                           ->getResult();
+        return $cities->getQuery()->getArrayResult();
     }
    
             

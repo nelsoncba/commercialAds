@@ -1,36 +1,61 @@
-commercial_ads_user:
-    resource: "@CommercialAdsUserBundle/Resources/config/routing.yml"
-    prefix:   /
+#commercial_ads_user:
+#    resource: "@CommercialAdsUserBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+#commercial_ads_advertiser:
+#    resource: "@LocalOfertasAdvertiserBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+#commercial_ads_ad:
+#    resource: "@CommercialAdsAdBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+#commercial_ads_user:
+#    resource: "@CommercialAdsUserBundle/Resources/config/routing.yml"
+#    prefix:   /
+#    
+#extranet:
+#    resource: "@CommercialAdsAdvertiserBundle/Resources/config/routing_extranet.yml"
+#    prefix:   /
+#
+#commercial_ads_advertiser:
+#    resource: "@CommercialAdsAdvertiserBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+#commercial_ads_ad:
+#    resource: "@CommercialAdsAdBundle/Resources/config/routing.yml"
+#    prefix:   /
+#    
+#commercial_ads_filter:
+#    resource: "@CommercialAdsFilterBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+#main:
+#    pattern:  /{region}
+#    defaults: { _controller: CommercialAdsAdBundle:Default:index, region: ''}
 
-commercial_ads_advertiser:
-    resource: "@LocalOfertasAdvertiserBundle/Resources/config/routing.yml"
-    prefix:   /
+index:
+   pattern: /
+   defaults: {_controller: CommercialAdsAdBundle:Default:index}
+   
+advertiser:
+    resource: "@CommercialAdsAdvertiserBundle/Controller/ApiAdvertiserController.php"
+    type: annotation
+    requirements:
+      format: json
+      
+ads:
+    resource: "@CommercialAdsAdBundle/Controller/"
+    type: annotation
+    requirements:
+      format: json
+      
+filter:
+    resource: "@CommercialAdsFilterBundle/Controller/ApiFilterController.php"
+    type: annotation
+    requirements:
+      format: json
+      
 
-commercial_ads_ad:
-    resource: "@CommercialAdsAdBundle/Resources/config/routing.yml"
-    prefix:   /
 
-commercial_ads_user:
-    resource: "@CommercialAdsUserBundle/Resources/config/routing.yml"
-    prefix:   /
-    
-extranet:
-    resource: "@CommercialAdsAdvertiserBundle/Resources/config/routing_extranet.yml"
-    prefix:   /anunciantes
-    
-commercial_ads_advertiser:
-    resource: "@CommercialAdsAdvertiserBundle/Resources/config/routing.yml"
-    prefix:   /
-
-commercial_ads_ad:
-    resource: "@CommercialAdsAdBundle/Resources/config/routing.yml"
-    prefix:   /
-    
-commercial_ads_filter:
-    resource: "@CommercialAdsFilterBundle/Resources/config/routing.yml"
-    prefix:   /
-
-main:
-    pattern:  /{region}
-    defaults: { _controller: CommercialAdsAdBundle:Default:index, region: ''}
 

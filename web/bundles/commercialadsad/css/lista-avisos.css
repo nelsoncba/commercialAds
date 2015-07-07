@@ -62,9 +62,9 @@
    font-weight: bold; 
    font-size: 14px;
    margin-top: 0;
-/*   overflow:hidden;
+   overflow:hidden;
    white-space:nowrap;
-   text-overflow: ellipsis;*/
+   text-overflow: ellipsis;
 }
 .anunciante-container{
     margin-top:10px;
@@ -92,13 +92,13 @@
     -moz-transition-property: all;
 }
 .anunciante-mini-data{
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 2px;
 }
 .precio-anuncio{
     margin-top: 50px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .pagination {float: right; margin-top: 8px;}
@@ -141,20 +141,14 @@ display: none;
    overflow: hidden;
    white-space: nowrap;
    text-overflow: ellipsis;
-   color: #ffffff;
-   font-weight: bold;
+   color: #398439;
    position: relative;
-   background-color: #565656 ;
-   opacity: 0.8;
+   background-color: #fff;
    top: -30px;
    padding-left: 3px;
    margin-left: 3px;
    margin-right: 3px;
 }
-.modal-title{
-   font-size: 14px;
-}
-
 @media screen and (max-width: 769px){
     .breads, .bread-prov, .bread-local, .bread-subcat{
         font-size: 10px;
@@ -240,7 +234,7 @@ display: none;
     .aviso-mini-title{
       margin-top: 0;
       font-weight: bold; 
-      font-size: 15px;
+      font-size: 12px;
     }
     .aviso-mini-content{
         font-size:12px;
@@ -305,8 +299,8 @@ display: none;
         height: 240px;
     }
     .body-map{
-        padding-top: 5px;
-        height: 250px;
+        padding-top: 10px;
+        height: 300px;
     }
     .input-address{
         width: 200px;
@@ -315,13 +309,7 @@ display: none;
         width: 230px;
         height: 230px;
     }
-    #form_mapa{
-        left: -15px;
-    }
-    #myaddress{
-       width: 200px;
-       
-    }
+    
 }
 @media screen and (max-width: 992px){
     .aviso-title{
@@ -342,4 +330,4 @@ display: none;
     img.logo-mini{
         display: none;
     }
-}		
+}

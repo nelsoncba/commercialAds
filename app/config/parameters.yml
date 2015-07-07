@@ -3,11 +3,11 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: commercialAds
+    database_name: commercialAds01
     database_user: root
-    database_password: null
+    database_password: ~
     mailer_transport: gmail
-    mailer_host: ~
+    mailer_host: null
     mailer_user: nelsonaccorsi84@gmail.com
     mailer_password: hupusyro
     locale: es

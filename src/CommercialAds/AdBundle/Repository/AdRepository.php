@@ -8,18 +8,21 @@ use CommercialAds\AdBundle\Entity\Ad;
 class AdRepository extends EntityRepository{
     
     public function findAds(){
-        $ad = $this->createQueryBuilder("ad")
-                       ->select("ad")
-                       ->where('ad.enabled = true')
+        $ad = $this->createQueryBuilder("a")
+                       ->select("a, adv, c, i")
+                       ->leftJoin("a.image","i")
+                       ->leftJoin("a.advertiser", "adv")
+                       ->leftJoin('adv.city','c')
+                       ->where('a.enabled = true')
                       // ->andWhere('o.fechaExpiracion > :fechaActual')
                      //  ->setParameter('fechaActual', date('Y-m-d H:i:s', time()))  //
-                       ->orderBy("ad.created_at", "DESC");
+                       ->orderBy("a.created_at", "DESC");
        // $ad->useResultCache(true, 600);
         
-        return $ad->getQuery()->getResult();
+        return $ad->getQuery()->getArrayResult();
     }
     
-    public function findBySubcategory($subcategory_id){
+    public function findBySubcategory($subcategory){
 //        $em = $this->getEntityManager();
 //        $ad = $em->createQuery('
 //            SELECT o From CommercialAds\OfertasBundle\Entity\Ofertas o
@@ -28,18 +31,22 @@ class AdRepository extends EntityRepository{
 //            ORDER BY o.fechaPublicacion DESC');
 //        $ad->setParameter('subcat', $subcategory_id);
         $ad = $this->createQueryBuilder("ad")
-                       ->select("ad")
-                       ->where("ad.subcategory = :subcat")
+                       ->select("ad, adv, i")
+                       ->leftJoin("ad.advertiser", "adv")
+                       ->leftJoin("ad.image","i")
+                       ->where("ad.subcategory = :subcategory")
                        ->andWhere("ad.enabled = true")
-                       ->setParameter("subcat", $subcategory_id)
+                       ->setParameter("subcategory", $subcategory)
                        ->orderBy("ad.created_at", "DESC");          
         
-        return $ad->getQuery()->getResult(); /*$ad->getQuery()->getResult();*/
+        return $ad->getQuery()->getArrayResult(); /*$ad->getQuery()->getResult();*/
     }
     
     public function findByCitySubcat($city,$subcategory){
         $ad = $this->createQueryBuilder("ad")
-                       ->select("ad")
+                       ->select("ad, adv, i")
+                       ->leftJoin("ad.advertiser", "adv")
+                       ->leftJoin("ad.image","i")
                        ->where("ad.city = :city")
                        ->andWhere('ad.enabled = true')
 //                       ->andWhere('o.fechaExpiracion > :fechaActual')
@@ -51,14 +58,16 @@ class AdRepository extends EntityRepository{
                   ->setParameter("subcat", $subcategory);
        }
    //    $ad->useResultCache(true, 600);
-        return $ad->getQuery()->getResult();
+        return $ad->getQuery()->getArrayResult();
     }
     
-    public function findByRegion($region,$subcategory){
+    public function findByRegionSubcat($region, $subcategory){
         $ad = $this->createQueryBuilder("ad")
-                       ->select("ad")
-                       ->innerJoin("ad.city", "c")
-                       ->where("c.region = :region")
+                       ->select("ad, adv, i")
+                       ->leftJoin("ad.region", "r")
+                       ->leftJoin("ad.image","i")
+                       ->leftJoin("ad.advertiser", "adv")
+                       ->where("ad.region = :region")
                        ->andWhere('ad.enabled = true')
 //                       ->andWhere('o.fechaExpiracion > :fechaActual')
 //                       ->setParameter('fechaActual', date('Y-m-d H:i:s', time()))
@@ -67,27 +76,29 @@ class AdRepository extends EntityRepository{
        
         if($subcategory){
            $ad->andWhere("ad.subcategory = :subcat")
-                  ->setParameter("subcat", $subcategory);
-       }
+              ->setParameter("subcat", $subcategory);
+        }
      //  $ad->useResultCache(true, 600);
        
-        return $ad->getQuery()->getResult();
+        return $ad->getQuery()->getArrayResult();
     }
     
     public function findAd($city,$slug){
         $ad = $this->createQueryBuilder("ad")
-                       ->select("ad")
+                       ->select("ad, c, s, a")
+                       ->leftJoin("ad.city", "c")
+                       ->leftJoin("ad.subcategory", "s")
+                       ->leftJoin("ad.advertiser", "a")
                        ->where("ad.slug = :slug")
                        ->andWhere('ad.enabled = true')
 //                       ->andWhere('o.fechaExpiracion > :fechaActual')
 //                       ->setParameter('fechaActual', date('Y-m-d H:i:s', time()))
                        ->setParameter("slug", $slug)
                        ->andWhere("ad.city = :city")
-                       ->setParameter("city", $city);
-        
-        $ad->setMaxResults(1);
+                       ->setParameter("city", $city)
+                       ->setMaxResults(1);
         $query = $ad->getQuery();
-        return $query->getOneOrNullResult();
+        return $query->getOneOrNullResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
     
     public function findAdByCoords($lat, $lng, $slug){
@@ -122,7 +133,7 @@ class AdRepository extends EntityRepository{
                        ->setParameter("advertiser", $advertiser)
                        ->setParameter("slug", $slug)
                        ->orderBy("ad.created_at", "DESC");
-        return $ad->getQuery()->getResult();
+        return $ad->getQuery()->getArrayResult();
     }
     
     public function findByCoords($lat, $lng, $distance, $radius, $subcategory){

@@ -1,16 +1,10 @@
-<div class=" col-filtros"> 
-        {% if regionSelected or citySelected or subcategorySelected or address or querySearch%}
+<div class="col-filtros"> 
         <ul class="filtros-container-show col-xs-12">
-            {%if address%}<div>Filtros por mi ubicación</div>{%else%}<div>Filtros</div>{%endif%}
+            <div>Filtros por mi ubicación</div><div>Filtros</div>
             
             <div class="filtros-container">
-                       {%if address %}
-                       <li class="filtro"><span class="filtro-address">{{address}}</span><a href="{{path('main')}}"><span>X</span></a></li>
-                       {%endif%}
-                       {%if querySearch %}
-                       <li class="filtro"><span class="filtro-querySearch">{{querySearch}}</span><a href="{%if subcategorySelected%}{{path('ad_subcategories',{'category':categorySelected, 'subcategory':subcategorySelected})}}{%else%}{{path('main')}}{%endif%}"><span>X</span></a></li>
-                       {%endif%}
-                       {%if regionSelected%}
+                       <li class="filtro"><span class="filtro-address">{{address}}</span><a href="#"><span>X</span></a></li>
+                       <li class="filtro"><span class="filtro-querySearch">{{querySearch}}</span><a href="#"><span>X</span></a></li>
                             <li class="filtro"><span class="filtro-prov-nom">{{region_name}}</span><a href="{%if subcategorySelected%}{{path('ad_subcategory',{'category':categorySelected, 'subcategory':subcategorySelected})}}{%else%}{{path('main')}}{%endif%}"><span>X</span></a></li>
                        {%endif%}
                        {%if citySelected%}

@@ -1,0 +1,132 @@
+<nav class="navbar-default sidebar">
+   <div class="col-filtros"> 
+        <ul class="filtros-container-show col-xs-12">
+            <div>Filtros</div>
+            <div class="filtros-container">
+              <!--  <li class="filtro">
+                    <span class="filtro-address">{{address}}</span><a href="#"><span>X</span></a>
+                </li>
+                <li class="filtro">
+                    <span class="filtro-querySearch">{{querySearch}}</span><a href="#"><span>X</span></a>
+                </li>-->
+                <li ng-if="regionFilter" class="filtro">
+                    <span class="filtro-prov-nom">{{regionFilter}}</span><a href="#"><span>&times;</span></a>
+                </li>
+                <li ng-if="cityFilter" class="filtro">
+                    <span class="filtro-local-nom">{{cityFilter}}</span><a href="#"><span>&times;</span></a>
+                </li>
+                <li ng-if="subcategoryFilter" class="filtro">
+                    <span class="filtro-subcat-nom">{{subcategoryFilter}}</span><a href="#"><span>&times;</span></a>
+                </li>
+             </div>
+        </ul>
+
+   <!--     <ul class="filtros-container-show col-xs-12">
+            <div>Filtros - Geolocalización</div>
+            <div class="filtros-container">
+              <li class="filtro">
+                  <span class="filtro-address">{{)}}</span><a href=""><span>X</span></a>
+              </li>
+              <li class="filtro">
+                  <span>{{}}</span><a href="#"><span>X</span></a>
+              </li>
+            </div>
+        </ul>  -->
+  </div>
+        
+   <section ng-if="!cities || regions">
+       <h5>Provincias</h5>
+       <ul>
+           <li ng-repeat="region in regions " ng-class="{'collapse': region.id > 12 ? !toggle : remove}">
+              <a ng-if="!subcategorySlug"  ui-sref="root.filter-region({region: region.slug})">{{region.name}}</a>
+              <a ng-if="subcategorySlug" ui-sref="root.filter-region-subcat({region: region.slug, category: categorySlug, subcategory:subcategorySlug})">{{region.name}}</a>
+           </li>
+           <li><a href="" role="button" ng-click="toggle = !toggle"><span>{{!toggle ? 'Ver mas...' : 'Ver menos...'}}</span></a></li>
+       </ul>
+   </section>
+   <section ng-if="cities">
+       <h5>Localidades</h5>
+       <ul>
+           <li ng-repeat="city in cities" ng-class="{'collapse': $index > 11 ? !toggle : remove}">
+              <a ng-if="!subcategorySlug"  ui-sref="root.filter-city({region:regionSlug, city:city.slug})">{{city.name}}</a>
+              <a ng-if="subcategorySlug" ui-sref="root.filter-city-subcat({region:regionSlug, city:city.slug, category: categorySlug, subcategory:subcategorySlug})">{{city.name}}</a>
+           </li>
+           <li ng-hide="cities.length < 11">
+              <a href="" role="button" ng-click="toggle = !toggle"><span>{{!toggle ? 'Ver mas...' : 'Ver menos...'}}</span>
+              </a>
+           </li>
+       </ul>
+   </section>
+    <ul class="nav side-menu">
+        <div class="titulo-menulat"><h4>Categorías</h4></div>
+        <li class="menu-item" ng-repeat="category in categories" ng-click="selectItem($index,category.slug, $event);"><a href=""  title="menu" >
+            <span class="item">{{category.name}}</span><span class="item-total pull-right">({{category.total}})</span></a>
+            <ul class="nav nav-second-level"  ng-class="{'collapse': $index != selectedItem, 'active': $index == selectedItem}">
+                <li  ng-repeat="subcategory in subcategories" ng-if="category.id == subcategory.category">
+                  <a ng-if="!regionSlug && !citySlug" ui-sref="root.filter-subcat({category: subcategory.category_slug, subcategory:subcategory.slug})" title="">
+                      <span class="subitem">{{subcategory.name}}</span><span class="subitem-total pull-right">({{subcategory.total}})</span>
+                  </a>
+                  <a ng-if="regionSlug && citySlug" ui-sref="root.filter-city-subcat({region:regionSlug, city:citySlug, category: subcategory.category_slug, subcategory:subcategory.slug})">
+                    <span class="subitem">{{subcategory.name}}</span><span class="subitem pull-right">({{subcategory.total}})</span>
+                  </a>
+                  <a ng-if="regionSlug && !citySlug" ui-sref="root.filter-region-subcat({region: regionSlug, category: subcategory.category_slug, subcategory:subcategory.slug})">
+                      <span class="subitem">{{subcategory.name}}</span><span class="subitem pull-right">({{subcategory.total}})</span>
+                  </a>
+                </li>
+            </ul> 
+        </li>
+    </ul>
+    
+<!--<ul id="menu">
+<li class="active"> <a href="#">Menu 0 <span class="fa arrow"></span></a>
+<ul>
+<li><a href="#">item 0.1</a></li>
+<li><a href="#">item 0.2</a></li>
+<li><a href="#">item 0.3</a></li>
+<li><a href="#">item 0.4</a></li>
+</ul>
+</li>
+<li> <a href="#">Menu 1 <span class="glyphicon arrow"></span></a>
+<ul>
+<li><a href="#">item 1.1</a></li>
+<li><a href="#">item 1.2</a></li>
+<li> <a href="#">Menu 1.3 <span class="fa plus-times"></span></a>
+<ul>
+<li><a href="#">item 1.3.1</a></li>
+<li><a href="#">item 1.3.2</a></li>
+<li><a href="#">item 1.3.3</a></li>
+<li><a href="#">item 1.3.4</a></li>
+</ul>
+</li>
+<li><a href="#">item 1.4</a></li>
+<li> <a href="#">Menu 1.5 <span class="fa plus-minus"></span></a>
+<ul>
+<li><a href="#">item 1.5.1</a></li>
+<li><a href="#">item 1.5.2</a></li>
+<li><a href="#">item 1.5.3</a></li>
+<li><a href="#">item 1.5.4</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li> <a href="#">Menu 2 <span class="glyphicon arrow"></span></a>
+<ul>
+<li><a href="#">item 2.1</a></li>
+<li><a href="#">item 2.2</a></li>
+<li><a href="#">item 2.3</a></li>
+<li><a href="#">item 2.4</a></li>
+</ul>
+</li>
+</ul>-->
+<ul class="nav" id="side-menu" accordion>
+    <div class="titulo-menulat"><h4>Categorías</h4></div>
+    <li class="menu-item" ng-repeat="category in categories">
+        <a href="#" title="menu"><span class="item-categoria" title="{{category.id}}">
+               Menu 2 </span></a>
+          <ul class="nav nav-second-level collapse">
+              <li ng-repeat="subcategory in subcategories" ng-if="category.id == subcategory.category"><a class="subcat-link" href=""><span class="item-subcategoria" data-id-subcat="{{subcategory.id}}">item 2.1</span></a></li>
+          </ul> 
+    </li>
+</ul>
+</nav>
+<script src="app/directive/directives.js"></script>

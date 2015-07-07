@@ -1,3 +1,69 @@
-advertisers_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: CommercialAdsAdvertisersBundle:Default:index }
+advertiser_registration:
+    pattern: /registration
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAd:registration, user: ''}
+    requirements:
+        _format: json
+        _method: POST
+ 
+cities_list:
+    pattern: /api/citiesList/{region}
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAdvertiser:loadCities}
+    requirements:
+        _format: json
+        _method: GET
+
+subcategories_list:
+    pattern: /api/subcategoriesList/
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAd:loadSubcategories}
+    requirements:
+        _format: json
+        _method: GET
+    
+advertiser_panel:
+    pattern: /api/advertiser-panel
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAd:panel}
+    requirements:
+        _format: json
+        _method: GET
+
+advertiser_profile:
+    pattern: /api/advertiser-profile
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAd:advertiserProfile}
+    requirements:
+        _format: json
+        _method: GET
+
+ad_creation:
+    pattern: /api/ad-creation
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAd:publishAd}
+    requirements:
+        _format: json
+        _method: POST
+        
+enable_ad:
+    pattern: /api/ad-activation/{id}
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAd:enable}
+    requirements:
+        _format: json
+        _method: GET
+
+my_ads:
+    pattern: /api/my-ads
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAd:panelAds}
+    requirements:
+        _format: json
+        _method: GET
+    
+disable_ad:
+    pattern: /api/ad-inactivation/{id}
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAd:disable}
+    requirements:
+        _format: json
+        _method: GET
+    
+removing_ad:
+    pattern: /api/removing-ad/{id}
+    defaults: { _controller: CommercialAdsAdvertiserBundle:ApiAd:deleteAd}
+    requirements:
+        _format: json
+        _method: DELETE

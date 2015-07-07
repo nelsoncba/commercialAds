@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="Ads">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="initial-scale=1">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="{{asset("bundles/commercialadsuser/css/login.css")}}">
+        <link rel="stylesheet" href="{{asset("bundles/commercialadsad/css/detalle.css")}}">
+        <link rel="stylesheet" href="{{asset("css/jquery.metisMenu.css")}}">
+        <link rel="stylesheet" href="{{asset("css/parsley/parsley.css")}}">
+        <link href="{{ asset("bundles/commercialadsad/css/lista-avisos.css") }}" type="text/css" rel="stylesheet"/>
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/logo-mini-rojo-extra.png') }}" />
+        
+        <!--jQuery-->
+        <script src="//code.jquery.com/jquery-2.0.3.js"></script>
+        
+        
+        <!--Bootstrap-->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        
+        <!--Angular-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+        <script src="{{ asset("app/lib/angular/angular-ui-router.min.js")}}"></script>
+        <script src="{{ asset("app/lib/angular/angular-cookies.min.js")}}"></script>
+        <script src="{{ asset("app/lib/angular/angular-route.min.js")}}"></script>
+        <script src="app/app.js"></script> 
+    </head>
+    <body>
+        <!--<div id="preloader">
+            <div id="loader">
+            </div>
+        </div>-->
+        <nav id="nav" class="navbar navbar-default nav-fixed-top" ui-view="header" ></nav>
+        <div class="container" ui-view="container">
+        <nav class="navbar-default sidebar" ui-view="side">
+            <ul class="nav" accordion id="side-menu" >
+                <div class="titulo-menulat"><h4>Categorías</h4></div>
+                <li class="menu-item" ng-repeat="category in categories"><a href="#" title="menu" >
+                    {{category.name}}<span class="pull-right">{{category.total}}</span>
+                    <ul class="nav nav-second-level collapse">
+                        <li ng-repeat="subcategory in subcategories" ng-if="category.id == subcategory.category"><a class="subcat-link" href=""  title="">
+                         {{subcategory.name}}<span class="pull-right">{{subcategory.total}}</span></a>
+                        </li>
+                    </ul> 
+                </li>
+            </ul>
+        </nav>
+       </div>                 
+         <footer class="">
+            <div class="col-xs-12">&copy; {{ 'now'|date('Y') }} - LocalOfertas -</div>
+            <div class="col-xs-12"><a href="#"> Ayuda | </a>
+            <a href="#"> Contacto | </a>
+            <a href="#"> Privacidad |</a>
+            <a href="#}"> Sobre nosotros </a></div>
+        </footer>
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+      <!--  <script> window.jQuery || document.write('<script src="{{asset('js/vendor/jquery-1.11.0.min.js')}}"><\/script>');</script>-->
+        <script src="app/controller/FilterController.js"></script>
+        <script src="app/directive/directives.js"></script>
+      <!--  <script src="{{asset("js/map.js")}}"></script>
+        <script src="{{asset("js/parsley/parsley-standalone.min.js")}}"></script>
+        <script src="{{asset("js/parsley/parsley.extend.min.js")}}"></script>
+        <script src="{{asset("js/parsley/parsley.min.js")}}"></script>-->
+        <script src="js/main.js"></script>
+        <script>
+          /* $(document).ready(function(){
+               selectImg();
+           });*/
+        </script>
+    </body>
+</html>

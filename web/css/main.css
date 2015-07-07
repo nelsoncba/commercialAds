@@ -69,10 +69,10 @@ ul, ol{
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-header{
+#nav{
     background-color: #ffffff;
-    height: 56px;
-    box-shadow: 1px 4px 12px #A8BBC4;
+    height: 50px;
+    box-shadow: 1px 3px 9px #A8BBC4;
     border-bottom: 1px solid #cc0000;
 }
 
@@ -129,6 +129,8 @@ header{
 .wrapper{
     padding-top: 60px;
     background-color: #DDEBEB;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 .back-container{
     width: 80%;
@@ -150,7 +152,10 @@ footer{
     margin-top:30px;
     margin-bottom: 20px;
 }
-.menu-item{border: 1px solid #D1D1D1;}
+.menu-item{
+    border: 1px solid #D1D1D1;
+    padding: 0px;
+}
 .navbar-static-side ul li {
     color: #03565F;
 }
@@ -161,12 +166,33 @@ footer{
 .nav-second-level li a {
     padding-left: 37px;
 }
-.item-categoria{
+.item, item-total{
     color:#4e888f;
+    position: absolute;
 }
-.item-subcategoria{
+li .item-total{
+    font-size: 9px;
+}
+.item{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+}
+ul.nav-second-level li .subitem{
+    padding-left: .917em !important;
     color:#474747;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+li .item{
+    font-size: .917em !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .select:focus, .input-address:focus, input-sm:focus{
     outline: none;
     border-color: #9DC5C7; 
@@ -319,6 +345,10 @@ footer a:hover{
 body {
     overflow: hidden;
 }
+.no-padding{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
 /* preloader */
 #preloader {
     position: fixed;
@@ -342,6 +372,26 @@ body {
   text-decoration: none;
   background-color: #FF646C;
 }
+
+.ad-padding{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.ad-title{  
+   font-weight: bold; 
+   font-size: 16px;
+}
+.ad-title, .ad-mini-title, .breads:hover, h4{
+   color: #4A6B6E;
+}
+.ad-image{
+    width:75px; 
+    height: 75px;
+}
+.ad-image-container{
+    margin-right: 10px !important;
+}
+
 
 @media screen and (max-width: 768px){
     .display-mini{

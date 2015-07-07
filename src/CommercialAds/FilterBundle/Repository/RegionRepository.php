@@ -11,10 +11,12 @@ class RegionRepository extends EntityRepository{
                           ->select("r")
                           ->where("r.slug = :slug")
                           ->setParameter("slug", $region);
-        
-        $query = $region->getQuery();
-        return $query->getOneOrNullResult();
-        
+        if($region){
+        	$query = $region->getQuery();
+        	return $query->getOneOrNullResult();
+        }else{
+        	return null;
+        }
     }
 }
 

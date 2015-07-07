@@ -1,5 +1,5 @@
 $(function(){
-    $('#side-menu').metisMenu();
+    //$('#side-menu').metisMenu();
 });
 
 $(document).keypress(function(e){

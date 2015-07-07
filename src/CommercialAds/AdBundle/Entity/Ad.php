@@ -96,15 +96,32 @@ class Ad
      * @var \Advertiser
      *
      * @ORM\ManyToOne(targetEntity="\CommercialAds\AdvertiserBundle\Entity\Advertiser", inversedBy="ad")
+     * @ORM\JoinColumns({
+     *  @ORM\JoinColumn(name="advertiser_id", referencedColumnName="id")
+     * })
      */
     private $advertiser;
     
+    /**
+     * @var \Category 
+     * 
+     * @ORM\ManyToOne(targetEntity="\CommercialAds\FilterBundle\Entity\Category", inversedBy="ad") 
+     */
+    private $category;
+            
     /**
      * @var \Subcategory
      *
      * @ORM\ManyToOne(targetEntity="\CommercialAds\FilterBundle\Entity\Subcategory", inversedBy="ad")
      */
     private $subcategory;
+    
+    /**
+     * @var \Region
+     * 
+     * @ORM\ManyToOne(targetEntity="\CommercialAds\FilterBundle\Entity\Region", inversedBy="ad")
+     */
+    private $region;
     
     /**
      * @var \City
@@ -372,6 +389,26 @@ class Ad
     }
     
     /**
+     * Set region
+     *
+     * @param \CommercialAds\FilterBundle\Entity\Region $region
+     * @return Ad
+     */
+    public function setRegion(\CommercialAds\FilterBundle\Entity\Region $region = null){
+        $this->region = $region;
+        
+        return $this;
+    }
+    
+    /**
+     * Get region
+     * 
+     * @return \CommercialAds\FilterBundle\Entity\Region
+     */
+    public function getRegion(){
+        return $this->region;
+    }
+    /**
      * Set city
      *
      * @param \CommercialAds\FilterBundle\Entity\City $city
@@ -394,6 +431,25 @@ class Ad
         return $this->city;
     }
     
+    /*
+     * Set category
+     *
+     * @param \CommercialAds\FilterBundle\Entity\Category $category
+     * @return Ads 
+     */
+    public function setCategory(\CommercialAds\FilterBundle\Entity\Category $category = null){
+        $this->category = $category;
+        return $this;
+    }
+    
+    /**
+     * Get category
+     * 
+     * @return \CommercialAds\FilterBundle\Entity\Category
+     */
+    public function getCategory(){
+        return $this->category;
+    }
     /**
      * Set subcategory
      *

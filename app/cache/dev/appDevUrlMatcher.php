@@ -120,213 +120,240 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // user_register
-        if ($pathinfo === '/registro') {
-            return array (  '_controller' => 'CommercialAds\\UserBundle\\Controller\\DefaultController::registerAction',  '_route' => 'user_register',);
-        }
-
-        // user_login
-        if ($pathinfo === '/login') {
-            return array (  '_controller' => 'CommercialAds\\UserBundle\\Controller\\DefaultController::loginAction',  '_route' => 'user_login',);
-        }
-
-        // user_profile
-        if ($pathinfo === '/perfil') {
-            return array (  '_controller' => 'CommercialAds\\UserBundle\\Controller\\DefaultController::perfilAction',  '_route' => 'user_profile',);
-        }
-
-        // user_registration_confirmation
-        if (0 === strpos($pathinfo, '/confirmar-registro') && preg_match('#^/confirmar\\-registro/(?P<token>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_registration_confirmation')), array (  '_controller' => 'CommercialAds\\UserBundle\\Controller\\DefaultController::confirmRegistrationAction',));
-        }
-
-        // user_email_resetpass
-        if ($pathinfo === '/email-password') {
-            return array (  '_controller' => 'CommercialAds\\UserBundle\\Controller\\DefaultController::emailResetPassAction',  '_route' => 'user_email_resetpass',);
-        }
-
-        if (0 === strpos($pathinfo, '/reset-password')) {
-            // user_reset_password
-            if (preg_match('#^/reset\\-password/(?P<token>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_reset_password')), array (  '_controller' => 'CommercialAds\\UserBundle\\Controller\\DefaultController::resetPasswordAction',));
-            }
-
-            // user_reset_pass_default
-            if ($pathinfo === '/reset-password') {
-                return array (  '_controller' => 'CommercialAds\\UserBundle\\Controller\\DefaultController::resetPassDefaultAction',  '_route' => 'user_reset_pass_default',);
-            }
-
-        }
-
-        // user_register_confirmation
-        if ($pathinfo === '/confirmar-registro') {
-            return array (  '_controller' => 'CommercialAds\\UserBundle\\Controller\\DefaultController::registrationConfirmationAction',  '_route' => 'user_register_confirmation',);
-        }
-
-        if (0 === strpos($pathinfo, '/log')) {
-            // user_login_check
-            if ($pathinfo === '/login_check') {
-                return array('_route' => 'user_login_check');
-            }
-
-            // user_logout
-            if ($pathinfo === '/logout') {
-                return array('_route' => 'user_logout');
-            }
-
-        }
-
-        // advertisers_homepage
-        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'advertisers_homepage')), array (  '_controller' => 'CommercialAdsAdvertisersBundle:Default:index',));
-        }
-
-        // searchEngine
-        if ($pathinfo === '/search') {
-            return array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::searchAction',  '_route' => 'searchEngine',);
-        }
-
-        // searchResults
-        if ($pathinfo === '/resultados') {
-            return array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::resultsAction',  '_route' => 'searchResults',);
-        }
-
-        // ad
-        if (preg_match('#^/(?P<region>[^/]++)/(?P<city>[^/]++)/(?P<category>[^/]++)/(?P<subcategory>[^/]++)/anuncio(?:\\-(?P<slug>[^/]++))?$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ad')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adAction',  'slug' => '',));
-        }
-
-        // ad_by_coord
-        if (0 === strpos($pathinfo, '/mi-ubicacion') && preg_match('#^/mi\\-ubicacion/(?P<lat>[^/]++)/(?P<lng>[^/]++)/(?P<category>[^/]++)/(?P<subcategory>[^/]++)/aviso(?:\\-(?P<slug>[^/]++))?$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ad_by_coord')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adByCoordsAction',  'slug' => '',));
-        }
-
-        // back_to_filter
-        if (preg_match('#^/(?P<region>[^/]++)/(?P<city>[^/]++)/rubro\\-(?P<subcat>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'back_to_filter')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adsByCityAction',));
-        }
-
-        if (0 === strpos($pathinfo, '/mi-ubicacion')) {
-            // back_filters_coords
-            if (preg_match('#^/mi\\-ubicacion/(?P<lat>[^/]++)/(?P<lng>[^/]++)/(?P<category>[^/]++)/(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'back_filters_coords')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adsCoordsAction',));
-            }
-
-            // my_location
-            if ($pathinfo === '/mi-ubicacion') {
-                return array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adsByGeolocationAction',  '_route' => 'my_location',);
-            }
-
-        }
-
-        if (0 === strpos($pathinfo, '/anunciantes')) {
-            // advertiser_register
-            if ($pathinfo === '/anunciantes/registro') {
-                return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::registrationAction',  'user' => '',  '_route' => 'advertiser_register',);
-            }
-
-            if (0 === strpos($pathinfo, '/anunciantes/cargar-')) {
-                // load_cities_ajax
-                if ($pathinfo === '/anunciantes/cargar-localidades') {
-                    return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::loadCitiesAction',  '_route' => 'load_cities_ajax',);
-                }
-
-                // load_subcategories_ajax
-                if ($pathinfo === '/anunciantes/cargar-subcategorias') {
-                    return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::loadSubcategoriesAction',  '_route' => 'load_subcategories_ajax',);
-                }
-
-            }
-
-            // advertiser_panel
-            if ($pathinfo === '/anunciantes/panel') {
-                return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::panelAction',  '_route' => 'advertiser_panel',);
-            }
-
-            // advertiser_profile
-            if ($pathinfo === '/anunciantes/datos-perfil') {
-                return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::advertiserProfileAction',  '_route' => 'advertiser_profile',);
-            }
-
-            if (0 === strpos($pathinfo, '/anunciantes/publicar')) {
-                // publish_ad
-                if ($pathinfo === '/anunciantes/publicar') {
-                    return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::publishAdAction',  '_route' => 'publish_ad',);
-                }
-
-                // enable_ad
-                if (preg_match('#^/anunciantes/publicar\\-(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'enable_ad')), array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::enableAction',));
-                }
-
-            }
-
-            // my_ads
-            if ($pathinfo === '/anunciantes/mis-anuncios') {
-                return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::panelAdsAction',  '_route' => 'my_ads',);
-            }
-
-            // disable_ad
-            if (0 === strpos($pathinfo, '/anunciantes/desactivar') && preg_match('#^/anunciantes/desactivar\\-(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'disable_ad')), array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::disableAction',));
-            }
-
-            // delete_ad
-            if (0 === strpos($pathinfo, '/anunciantes/eliminar') && preg_match('#^/anunciantes/eliminar\\-(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'delete_ad')), array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\DefaultController::deleteAdAction',));
-            }
-
-        }
-
-        // ad_subcategory
-        if (preg_match('#^/(?P<category>[^/]++)/(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ad_subcategory')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::filteredAdsAction',));
-        }
-
-        // ad_region_subcat
-        if (preg_match('#^/(?P<region>[^/]++)/(?P<category>[^/]++)/(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ad_region_subcat')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adsByRegionAction',));
-        }
-
-        // ad_city_subcat
-        if (preg_match('#^/(?P<region>[^/]++)/(?P<city>[^/]++)/(?P<category>[^/]++)/(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ad_city_subcat')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adsByCityAction',));
-        }
-
-        // ad_city
-        if (preg_match('#^/(?P<region>[^/]++)/(?P<city>[^/]++)/?$#s', $pathinfo, $matches)) {
+        // index
+        if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'ad_city');
+                return $this->redirect($pathinfo.'/', 'index');
             }
 
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ad_city')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adsByCityAction',  'subcategory' => '',));
+            return array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::indexAction',  '_route' => 'index',);
         }
 
-        // ad_region
-        if (preg_match('#^/(?P<region>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ad_region')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adsByRegionAction',  'subcategory' => '',));
-        }
+        if (0 === strpos($pathinfo, '/api')) {
+            if (0 === strpos($pathinfo, '/api/ad')) {
+                // commercialads_advertiser_apiadvertiser_panel
+                if ($pathinfo === '/api/advertiser-panel') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_commercialads_advertiser_apiadvertiser_panel;
+                    }
 
-        if (0 === strpos($pathinfo, '/mi-ubicacion')) {
-            // near_coords
-            if (preg_match('#^/mi\\-ubicacion/(?P<lat>[^/]++)/(?P<lng>[^/]++)/?$#s', $pathinfo, $matches)) {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'near_coords');
+                    return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\ApiAdvertiserController::panelAction',  '_route' => 'commercialads_advertiser_apiadvertiser_panel',);
+                }
+                not_commercialads_advertiser_apiadvertiser_panel:
+
+                // commercialads_advertiser_apiadvertiser_publishad
+                if ($pathinfo === '/api/ad-creation') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_commercialads_advertiser_apiadvertiser_publishad;
+                    }
+
+                    return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\ApiAdvertiserController::publishAdAction',  '_route' => 'commercialads_advertiser_apiadvertiser_publishad',);
+                }
+                not_commercialads_advertiser_apiadvertiser_publishad:
+
+                if (0 === strpos($pathinfo, '/api/advertiser')) {
+                    // commercialads_advertiser_apiadvertiser_registration
+                    if ($pathinfo === '/api/advertiser/registration') {
+                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                            $allow = array_merge($allow, array('GET', 'HEAD'));
+                            goto not_commercialads_advertiser_apiadvertiser_registration;
+                        }
+
+                        return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\ApiAdvertiserController::registrationAction',  '_route' => 'commercialads_advertiser_apiadvertiser_registration',);
+                    }
+                    not_commercialads_advertiser_apiadvertiser_registration:
+
+                    // commercialads_advertiser_apiadvertiser_advertiserprofile
+                    if ($pathinfo === '/api/advertiser-profile') {
+                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                            $allow = array_merge($allow, array('GET', 'HEAD'));
+                            goto not_commercialads_advertiser_apiadvertiser_advertiserprofile;
+                        }
+
+                        return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\ApiAdvertiserController::advertiserProfileAction',  '_route' => 'commercialads_advertiser_apiadvertiser_advertiserprofile',);
+                    }
+                    not_commercialads_advertiser_apiadvertiser_advertiserprofile:
+
                 }
 
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'near_coords')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adsCoordsAction',  'subcategory' => NULL,));
             }
 
-            // near_coords_subcat
-            if (preg_match('#^/mi\\-ubicacion/(?P<lat>[^/]++)/(?P<lng>[^/]++)/(?P<category>[^/]++)/(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'near_coords_subcat')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::adsCoordsAction',));
+            // commercialads_advertiser_apiadvertiser_panelads
+            if ($pathinfo === '/api/my-ads') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_commercialads_advertiser_apiadvertiser_panelads;
+                }
+
+                return array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\ApiAdvertiserController::panelAdsAction',  '_route' => 'commercialads_advertiser_apiadvertiser_panelads',);
+            }
+            not_commercialads_advertiser_apiadvertiser_panelads:
+
+            if (0 === strpos($pathinfo, '/api/o')) {
+                // commercialads_advertiser_apiadvertiser_disable
+                if (0 === strpos($pathinfo, '/api/off-ad') && preg_match('#^/api/off\\-ad/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'PUT') {
+                        $allow[] = 'PUT';
+                        goto not_commercialads_advertiser_apiadvertiser_disable;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_advertiser_apiadvertiser_disable')), array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\ApiAdvertiserController::disableAction',));
+                }
+                not_commercialads_advertiser_apiadvertiser_disable:
+
+                // commercialads_advertiser_apiadvertiser_enabled
+                if (0 === strpos($pathinfo, '/api/on-ad') && preg_match('#^/api/on\\-ad/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'PUT') {
+                        $allow[] = 'PUT';
+                        goto not_commercialads_advertiser_apiadvertiser_enabled;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_advertiser_apiadvertiser_enabled')), array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\ApiAdvertiserController::enabledAction',));
+                }
+                not_commercialads_advertiser_apiadvertiser_enabled:
+
             }
 
-        }
+            // commercialads_advertiser_apiadvertiser_deletead
+            if (0 === strpos($pathinfo, '/api/removing-ad') && preg_match('#^/api/removing\\-ad/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_commercialads_advertiser_apiadvertiser_deletead;
+                }
 
-        // main
-        if (preg_match('#^/(?P<region>[^/]++)?$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'main')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\DefaultController::indexAction',  'region' => '',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_advertiser_apiadvertiser_deletead')), array (  '_controller' => 'CommercialAds\\AdvertiserBundle\\Controller\\ApiAdvertiserController::deleteAdAction',));
+            }
+            not_commercialads_advertiser_apiadvertiser_deletead:
+
+            if (0 === strpos($pathinfo, '/api/a')) {
+                // commercialads_ad_apiad_getall
+                if (0 === strpos($pathinfo, '/api/allAds') && preg_match('#^/api/allAds/(?P<page>[^/]++)$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_commercialads_ad_apiad_getall;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_ad_apiad_getall')), array (  'perPage' => 5,  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::getAllAction',));
+                }
+                not_commercialads_ad_apiad_getall:
+
+                if (0 === strpos($pathinfo, '/api/ad')) {
+                    // single_Ad
+                    if (preg_match('#^/api/ad/(?P<city>[^/]++)/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                            $allow = array_merge($allow, array('GET', 'HEAD'));
+                            goto not_single_Ad;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'single_Ad')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::getAdAction',));
+                    }
+                    not_single_Ad:
+
+                    if (0 === strpos($pathinfo, '/api/ads')) {
+                        // ads_by_coords
+                        if (0 === strpos($pathinfo, '/api/ads/coords') && preg_match('#^/api/ads/coords/(?P<lat>[^/]++)/(?P<lng>[^/]++)/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+                            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                                $allow = array_merge($allow, array('GET', 'HEAD'));
+                                goto not_ads_by_coords;
+                            }
+
+                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ads_by_coords')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::adsByCoordsAction',));
+                        }
+                        not_ads_by_coords:
+
+                        // commercialads_ad_apiad_adsbyregion
+                        if (0 === strpos($pathinfo, '/api/ads/region') && preg_match('#^/api/ads/region\\=(?P<region>[^/]++)/subcategory\\=(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
+                            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                                $allow = array_merge($allow, array('GET', 'HEAD'));
+                                goto not_commercialads_ad_apiad_adsbyregion;
+                            }
+
+                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_ad_apiad_adsbyregion')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::adsByRegionAction',));
+                        }
+                        not_commercialads_ad_apiad_adsbyregion:
+
+                        // commercialads_ad_apiad_adsbycity
+                        if (0 === strpos($pathinfo, '/api/ads/city') && preg_match('#^/api/ads/city\\=(?P<city>[^/]++)/subcategory\\=(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
+                            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                                $allow = array_merge($allow, array('GET', 'HEAD'));
+                                goto not_commercialads_ad_apiad_adsbycity;
+                            }
+
+                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_ad_apiad_adsbycity')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::adsByCityAction',));
+                        }
+                        not_commercialads_ad_apiad_adsbycity:
+
+                        // commercialads_ad_apiad_adsbysubcategory
+                        if (0 === strpos($pathinfo, '/api/ads/subcategory') && preg_match('#^/api/ads/subcategory\\=(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
+                            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                                $allow = array_merge($allow, array('GET', 'HEAD'));
+                                goto not_commercialads_ad_apiad_adsbysubcategory;
+                            }
+
+                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_ad_apiad_adsbysubcategory')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::adsBySubcategoryAction',));
+                        }
+                        not_commercialads_ad_apiad_adsbysubcategory:
+
+                        // commercialads_ad_apiad_adsbygeolocation
+                        if (0 === strpos($pathinfo, '/api/ads/geolocation') && preg_match('#^/api/ads/geolocation/(?P<lat>[^/]++)/(?P<lng>[^/]++)/(?P<address>[^/]++)/(?P<category>[^/]++)/(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
+                            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                                $allow = array_merge($allow, array('GET', 'HEAD'));
+                                goto not_commercialads_ad_apiad_adsbygeolocation;
+                            }
+
+                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_ad_apiad_adsbygeolocation')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::adsByGeolocationAction',));
+                        }
+                        not_commercialads_ad_apiad_adsbygeolocation:
+
+                    }
+
+                }
+
+            }
+
+            // commercialads_filter_apifilter_regionslist
+            if ($pathinfo === '/api/regions/list') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_commercialads_filter_apifilter_regionslist;
+                }
+
+                return array (  '_controller' => 'CommercialAds\\FilterBundle\\Controller\\ApiFilterController::regionsListAction',  '_route' => 'commercialads_filter_apifilter_regionslist',);
+            }
+            not_commercialads_filter_apifilter_regionslist:
+
+            if (0 === strpos($pathinfo, '/api/c')) {
+                // commercialads_filter_apifilter_citieslist
+                if (0 === strpos($pathinfo, '/api/cities/list/region') && preg_match('#^/api/cities/list/region\\=(?P<region>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_filter_apifilter_citieslist')), array (  '_controller' => 'CommercialAds\\FilterBundle\\Controller\\ApiFilterController::citiesListAction',));
+                }
+
+                // commercialads_filter_apifilter_categorieslist
+                if (0 === strpos($pathinfo, '/api/categories/list/region') && preg_match('#^/api/categories/list/region\\=(?P<region>[^/]++)/city\\=(?P<city>[^/]++)$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_commercialads_filter_apifilter_categorieslist;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_filter_apifilter_categorieslist')), array (  '_controller' => 'CommercialAds\\FilterBundle\\Controller\\ApiFilterController::categoriesList',));
+                }
+                not_commercialads_filter_apifilter_categorieslist:
+
+            }
+
+            // commercialads_filter_apifilter_subcategorieslist
+            if (0 === strpos($pathinfo, '/api/subcategories/list/region') && preg_match('#^/api/subcategories/list/region\\=(?P<region>[^/]++)/city\\=(?P<city>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_commercialads_filter_apifilter_subcategorieslist;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_filter_apifilter_subcategorieslist')), array (  '_controller' => 'CommercialAds\\FilterBundle\\Controller\\ApiFilterController::subcategoriesList',));
+            }
+            not_commercialads_filter_apifilter_subcategorieslist:
+
         }
 
         // _welcome

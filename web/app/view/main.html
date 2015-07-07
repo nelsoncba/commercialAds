@@ -1,0 +1,38 @@
+<article ng-init="init()">
+  <div ng-if="error" class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;{{error}}</div>
+  <div ng-repeat="ad in ads">
+	<div class="media ad-padding" style="border-bottom: 1px #ccc solid; padding-top: 15px; padding-bottom: 15px;">
+	  <div class="media-left">
+           <div class="pull-left ad-image-container" style="border:1px #ccc solid;">
+	      <img class="media-object ad-image" src="uploads/images/{{ad.image.path1}}" alt="...">
+           </div>
+	  </div>
+	  <div class="media-body">
+              <div class="media-heading">
+                  <span class="ad-title">
+                      <strong>{{ad.title}}</strong>
+                  </span>
+                  <span class="pull-right">{{ad.created_at | date: 'dd-MM-yyyy'}}</span>
+              </div>
+              <div class="pull-left"><span class="label label-primary">{{ad.advertiser.name}}</span>&nbsp;-<span>{{ad.advertiser.street}}</span>&nbsp;
+              <span>{{ad.advertiser.number}}</span>,&nbsp;<span>{{ad.advertiser.city.name}}</span>&nbsp;-&nbsp;
+              <span>{{ad.advertiser.phone}}</span>&nbsp;-&nbsp;<span>hr:{{ad.advertiser.hours}}</span></div>
+	  </div>
+          <div style="background-color:#ccc;"><span class="pull-right">{{ad.typePrice == "pesos" ? "$" : "%" }}&nbsp{{ad.price}}</span></div>
+	</div>
+  </div>
+</article>
+<!--<ul class="pagination">
+<li><a href="" ng-click="pagination.prevPage()">&laquo;</a></li>
+  <li ng-repeat="n in [] | range: pagination.numPages" ng-class="{active: n == pagination.page}">
+  <a href="" ng-click="pagination.toPageId(n)">{{n + 1}}</a>
+  </li>
+  <li><a href="" ng-click="pagination.nextPage()">&raquo;</a></li>
+</ul>-->
+<div ng-pager 
+     current-page="{{currentPage}}" 
+     total-pages="{{totalPages}}" 
+     max-pages-to-display="{{maxPagesToDisplay}}" 
+     page-changed="paged(pageNum)"
+     enable-jump-controls="true"
+     ></div>

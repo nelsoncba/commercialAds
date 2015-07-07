@@ -39,6 +39,9 @@ class City
      * @var \Region
      *
      * @ORM\ManyToOne(targetEntity="CommercialAds\FilterBundle\Entity\Region")
+     * @ORM\JoinColumns({
+     *  @ORM\JoinColumn(name="region_id", referencedColumnName="id")
+     * })
      */
     private $region;
 

@@ -1,229 +1,233 @@
-//$(document).ready(function(){
-//        load_map(lat,long);
-//        mapOnFooter();
-//});
 
- //VARIABLES GLOBALES JAVASCRIPT
-var geocoder;
-var marker;
-var latLng;
-var latLng2;
+var zoom;
 var map;
-var zoon;
+var map2;
+var map3;
+var geocoder;
+var myUbi;
+var myLatlng;
+var marker_geolocation;
+var marker_myubication;
+var marker2;
 
-// INICiALIZACION DE MAPA
-function load_map(lat,long) {
-    zoon = 14;
-    geocoder = new google.maps.Geocoder();	
-    latLng = new google.maps.LatLng(lat,long);//(-31.416614, -64.183376);
-    map = new google.maps.Map($('#map_canvas').get(0), {
-        zoom:zoon,
-        center: latLng,
+function initialize(lat,lng,lat2,lng2){
+    geocoder = new google.maps.Geocoder();
+    myLatlng = new google.maps.LatLng(lat,lng);
+    if(lat2 && lng2){
+        myUbi = new google.maps.LatLng(lat2, lng2);
+    }
+    if($(window).width()<500)
+        zoom = 13,5;
+    else if($(window).width()>500)
+        zoom = 14,5;
+    var mapOptions = {
+        center: myLatlng,
+        zoom: zoom,
         mapTypeControl: false,
         panControl:false,
         rotateControl:false,
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    
+    map = new google.maps.Map(document.getElementById("map_canvas"),
+    mapOptions);
+    
+    map2 = new google.maps.Map(document.getElementById("map_canvas_2"),
+    mapOptions);
+    
+    var contentString = '<div id="mapInfo">'+
+            '<p><strong>'+$(this).attr('anunciante')+'</strong><br>'+
+            '<br>'+$(".dir-calle").html()+' '+$(".dir-num").html()+'<br>' +
+             $(".dir-localidad").html()+'<br>'+
+            '</div>';
+    
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
     });
     
-    
-    // CREACION DEL MARCADOR  
-    marker = new google.maps.Marker({
-        position: latLng,
-        title: 'Arrastra el marcador para buscar tu dirección',
+    var marker = new google.maps.Marker({
+        position: myLatlng,
         map: map,
-        draggable: true
-    });
- 
-    // Escucho el CLICK sobre el mapa y si se produce actualizo la posicion del marcador 
-    google.maps.event.addListener(marker, 'mouseup', function(event) {
-        updateMarker(event.latLng);
-    }); 
-    
-    // Inicializo los datos del marcador
-    updateMarkerPosition(latLng);
-    
-    geocodePosition(latLng);
-    
-    // Permito los eventos drag/drop sobre el marcador
-    google.maps.event.addListener(marker, 'dragstart', function() {
-        updateMarkerAddress('Arrastrando...');
+        title:"Ubicación anuncio",
+        maxWidth: 200,
+        maxHeight: 200
     });
     
-    google.maps.event.addListener(marker, 'drag', function() {
-        updateMarkerStatus('Arrastrando...');
-        updateMarkerPosition(marker.getPosition());
+    marker_geolocation = new google.maps.Marker({
+        position: myLatlng,
+        map: map2,
+        title:"Mi ubicación",
+        icon: "https://maps.gstatic.com/mapfiles/ms2/micons/man.png",
+        maxWidth: 200,
+        maxHeight: 200
     });
     
-    google.maps.event.addListener(marker, 'dragend', function() {
-        updateMarkerStatus('Arrastre finalizado');
-        geocodePosition(marker.getPosition());
-    });  
+    if(myUbi){
+        marker_myubication = new google.maps.Marker({
+            position: myUbi,
+            map: map,
+            title:"Mi ubicación",
+            icon: "https://maps.gstatic.com/mapfiles/ms2/micons/man.png",
+            maxWidth: 200,
+            maxHeight: 200
+        });
+    }
+    
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
+    });
 }
 
-
-// Permito la gesti¢n de los eventos DOM
-google.maps.event.addDomListener(window, 'load', initialize);
-
-////start of modal google map
+function load_map_registro(){
+    zoom = 16;
+    myLatlng = new google.maps.LatLng(-31.416614, -64.183376);
+    var mapOptions = {
+                center: myLatlng,
+                zoom: zoom,
+                zoomControl: false,
+                scrollwheel: false,
+                scaleControl: false,
+                mapTypeControl: false,
+                panControl:false,
+                rotateControl:false,
+                streetViewControl: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map3 = new google.maps.Map(document.getElementById("map_canvas_3"),
+    mapOptions);
+    
+    marker2 = new google.maps.Marker({
+        position: myLatlng,
+        map: map3,
+        title:"Ubicación negocio anunciante",
+        maxWidth: 200,
+        maxHeight: 200
+    });
+}
+    google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', load_map_registro);
+    
+ //start of modal google map
 $('#mapmodals').on('shown.bs.modal', function () {
     google.maps.event.trigger(map, "resize");
-    map.setCenter(myLatlng);
+    if(myUbi){
+        map.setCenter(myUbi);
+    }else{
+        map.setCenter(myLatlng);   
+    }
 });
 
-// ESTA FUNCION OBTIENE LA DIRECCION A PARTIR DE LAS COORDENADAS POS
-function geocodePosition(pos) {
-    geocoder.geocode({
-        latLng: pos
-    }, function(responses) {
-        if (responses && responses.length > 0) {
-            updateMarkerAddress(responses[0].formatted_address);
-        } else {
-            updateMarkerAddress('No puedo encontrar esta direccion.');
-        }
-    });
-}
 
-// OBTIENE LA DIRECCION A PARTIR DEL LAT y LON DEL FORMULARIO
-//function codeLatLon() { 
-//      str= $("#longitud").value()+" , "+$("#latitud").value();
-//      latLng2 = new google.maps.LatLng($("#latitud").value() ,$("#longitud").value());
-//      marker.setPosition(latLng2);
-//      map.setCenter(latLng2);
-//      geocodePosition (latLng2);
-//      // document.form_mapa.direccion.value = str+" OK";
-//}
-
-function localizarAviso(lat, long){
-   $("#latitud").val(lat); $("#longitud").val(long);
-   latLng2 = new google.maps.LatLng(lat, long);
-      marker.setPosition(latLng2);
-      map.setCenter(latLng2);
-      zoom = 25;
-      geocodePosition (latLng2);                       
-}
-
-//OBTIENE LAS COORDENADAS DESDE lA DIRECCION EN LA CAJA DEL FORMULARIO
-function codeAddress() {
-    var address = $("#direccion").val();
-    geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-            updateMarkerAddress(results[0].formatted_address);
-            updateMarkerPosition(results[0].geometry.location);
-            marker.setPosition(results[0].geometry.location);
-            map.setCenter(results[0].geometry.location);
-            zoon = 25;
-        } else {
-            updateMarkerAddressError("Ingrese datos a buscar");
-        }
-    });
-}
-
-// OBTIENE LAS COORDENADAS DESDE lA DIRECCION EN LA CAJA DEL FORMULARIO
-function codeAddress2 (address) {
-    
-    geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-            updateMarkerPosition(results[0].geometry.location);
-            marker.setPosition(results[0].geometry.location);
-            map.setCenter(results[0].geometry.location);
-            document.form_mapa.direccion.value = address;
-        } else {
-            alert('ERROR : ' + status);
-        }
-    });
-}
-
-function updateMarkerStatus(str) {
-    $("#direccion-guardada").val(str);
-}
-
-// RECUPERO LOS DATOS LON LAT Y DIRECCION Y LOS PONGO EN EL FORMULARIO
-function updateMarkerPosition (latLng) {
-    $("#longitud").val(latLng.lng()); //para formularios hidden 
-    $("#latitud").val(latLng.lat()); //para formulario hidden
-}
-
-function updateMarkerAddress(str) {
-    $("#direccion").val("");
-    $("#direccion-guardada").val(str).css({"color":"black"});
-    if($("#direccion-guardada").val().length > 50){
-        $(".direccion-guardada").css({"color":"black", "padding": "2px"});
-    }
-}
-
-function updateMarkerAddressError(str){
-    $("#direccion-guardada").val(str).css("color", "red");
-}
-
-// ACTUALIZO LA POSICION DEL MARCADOR
-function updateMarker(location) {
-    marker.setPosition(location);
-    updateMarkerPosition(location);
-    geocodePosition(location);
-}
+$('#map-cercanas').on('shown.bs.modal', function () {
+    google.maps.event.trigger(map2, "resize");
+    map2.setCenter(myLatlng);
+});
+//end of modal google map
 
 function geolocalizar() {
+    $(".rpta-geosearch").html("");
     if (navigator.geolocation) {
         var options = {
                  enableHighAccuracy : false,
                  maximumAge : 20000,
                  timeout : 5000
-                };
+        };
 
-        $(".button-loc").addClass("button-loc-active");
-        navigator.geolocation.getCurrentPosition(coordenadas, error, options);
-        $("#direccion-guardada").val("Buscando....");
+        $(".img-localization-2").css("display","initial");
+        $(".img-localization-1").css("display","none");
+        navigator.geolocation.getCurrentPosition(function(coordenadas){
+             initialize(coordenadas.coords.latitude,coordenadas.coords.longitude);
+             addressByCoords(myLatlng);
+        }, error, options);
     }else{
-        alert('Este navegador es algo antiguo, actualiza para usar el API de localización');                  }
-}
-function coordenadas(position) {
-    var lat = position.coords.latitude; 
-    var lon = position.coords.longitude;
-    $("#direccion-guardada").val("Usted se encuentra en este punto.");
-    latLng = new google.maps.LatLng(lat, lon); 
-    updateMarker(latLng);
-    map.setCenter(latLng);
+        alert('Este navegador es algo antiguo, actualiza para usar el API de localización');  
+    }
 }
 
-function error(error)
-{
+function error(error){
     switch(error.code) {
         case error.PERMISSION_DENIED:
             alert("El Usuario negó la solicitud de Geolocalización.");
-            $(".button-loc").removeClass("button-loc-active");
-            $("#direccion-guardada").val(" ");
+            $(".img-localization-2").css("display","none");
+            $(".img-localization-1").css("display","initial");
             break;
 
         case error.POSITION_UNAVAILABLE:
             alert("La información de la localización no está disponible");
-            $("#direccion-guardada").val(" ");
-            break;
+            $(".img-localization-2").css("display","none");
+            $(".img-localization-1").css("display","initial");            break;
 
         case error.TIMEOUT:
             alert("La petición para obtener la ubicación del usuario ha excedido su tiempo");
-            $(".button-loc").removeClass("button-loc-active");
-            $("#direccion-guardada").val(" ");
+            $(".img-localization-2").css("display","none");
+            $(".img-localization-1").css("display","initial");
             break;
 
         case error.UNKNOWN_ERROR:
             alert("Ha ocurrido un error desconocido");
-            $("#direccion-guardada").val("");
+            $(".img-localization-2").css("display","none");
+            $(".img-localization-1").css("display","initial");
             break;
     }
 }
-
-function mapOnFooter(){
-   $(window).scroll(function(){
-      var total =  $(document).height() - $(window).height();
-          //alert("footer altura " + total );
-         if($(window).scrollTop() === total ){
-         //$(".right-section").css("background","green");
-             $(".right-section").addClass("extraright-section");
-         }else{
-             $(".right-section").removeClass("extraright-section");
-         }
-   });
+//address by coords.
+function addressByCoords(coords) {
+    geocoder.geocode({
+        latLng: coords
+    }, function(responses) {
+        if (responses && responses.length > 0) {
+            $(".rpta-geosearch").html(responses[0].address_components[1].short_name+' '+responses[0].address_components[0].short_name+', '+responses[0].address_components[2].short_name).css("color","#398439");
+            $("#address").val(responses[0].address_components[1].short_name+' '+responses[0].address_components[0].short_name+', '+responses[0].address_components[2].short_name);
+          
+            $("#latitud").val(coords.lat());
+            $("#longitud").val(coords.lng());
+        } else {
+            $(".rpta-geosearch").html('Dirección no existe.').css("color","red");
+        }
+    });
 }
 
-/* show map dialog from ads*/
+function codeAddress() {
+    address = $("#myaddress").val();
+    //         alert(' '+address);
+    geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            var address = (results[0].address_components[1].short_name+' '+results[0].address_components[0].short_name+', '+results[0].address_components[2].short_name);
+            marker_geolocation.setPosition(results[0].geometry.location);
+            map2.setCenter(results[0].geometry.location);
+            addressByCoords(results[0].geometry.location);
+            $(".rpta-geosearch").html(address).css("color","#398439");
+            $("#myaddress").val("");
+        } else {
+            $(".rpta-geosearch").html("Error: ingrese datos correctos").css("color","red");
+        }
+    });
+}
+
+function codeAddressMapReg(){
+    address = $('#calle').val()+' '+$('#numero').val()+' '+$('#local option:selected').text()+' '+$('#prov option:selected').text();
+    geocoder.geocode({
+        'address': address}, function(results, status){
+        if(status === google.maps.GeocoderStatus.OK){
+            var address = (results[0].address_components[1].short_name+' '+results[0].address_components[0].short_name+', '+results[0].address_components[2].short_name);
+            marker2.setPosition(results[0].geometry.location);
+            map3.setCenter(results[0].geometry.location);
+           // coords = (results[0].geometry.location);
+            $("#latitudAn").val((results[0].geometry.location).lat());
+            $("#longitudAn").val((results[0].geometry.location).lng());
+        }
+    });
+}
+
+$('#calle').keyup(function(){ 
+    $('#numero').val('');
+    $("#latitudAn").val('');
+    $("#longitudAn").val('');
+    codeAddress();
+});
+
+$('#numero').change(function(){
+    codeAddressMapReg();
+}); 
+

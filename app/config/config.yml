@@ -13,7 +13,7 @@ framework:
     csrf_protection: ~
     validation:      { enable_annotations: true }
     templating:
-        engines: ['twig']
+        engines: ['twig','php']
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
@@ -70,4 +70,9 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    spool:     { type: memory }
+    #spool:     { type: memory }
+    
+fos_rest:
+    view:
+        view_response_listener: 'force'
+ 

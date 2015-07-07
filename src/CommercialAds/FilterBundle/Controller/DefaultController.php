@@ -39,7 +39,7 @@ class DefaultController extends Controller
     public function sidebarAction($region,$city,$lat,$lng){
         $em = $this->getDoctrine()->getManager();
         
-        $categories = $em->getRepository("CommercialAdsFilterBundle:Category")->findAll();
+        $categories = $em->getRepository("CommercialAdsFilterBundle:Category")->findAllCategories($region,$city);
         $subcategories = $em->getRepository("CommercialAdsFilterBundle:Subcategory")->findAll();
         
         $response = $this->render("CommercialAdsFilterBundle:Default:sidebar.html.twig", array( 
