@@ -170,8 +170,8 @@ footer{
     color:#4e888f;
     position: absolute;
 }
-li .item-total{
-    font-size: 9px;
+li .item-total, li .subitem-total{
+    font-size: 11px;
 }
 .item{
     overflow: hidden;
@@ -180,7 +180,8 @@ li .item-total{
     position: relative;
 }
 ul.nav-second-level li .subitem{
-    padding-left: .917em !important;
+    font-size: 12px;
+    left: -1px !important;
     color:#474747;
     overflow: hidden;
     text-overflow: ellipsis;

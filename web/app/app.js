@@ -12,35 +12,83 @@ angular.module('Ads',['ui.router','simplePagination', 'NgPager'])
 
             // angular.element('#side-menu').metisMenu();
             $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+                
                 if(toState.name == 'root'){
-                    $rootScope.regionFilter = $rootScope.cityFilter = $rootScope.subcategoryFilter = null;
-                    $rootScope.regionSlug = 0;
+                    if(!toParams.subcategory){
+                        $rootScope.regionFilter = $rootScope.cityFilter = $rootScope.subcategoryFilter = null;
+                        $rootScope.regionSlug = $rootScope.categorySlug = $rootScope.subcategorySlug = 0;
+                    }
                 }
-                if(toState.name == 'root.filter-region'){
-                    if(toParams.region)
-                        $rootScope.regionSlug = toParams.region;
+                /*if(toParams.region){
+                    $rootScope.regionSlug = toParams.region;
+                    if(toParams.city == null){
+                        $rootScope.citySlug = 0;
+                        $rootScope.cityFilter = null;
+                    }
+                    if(toParams.subcategory == null){
                         $rootScope.subcategorySlug = 0;
-                    if(!toParams.region){
-                        $rootScope.regionSlug = 0;
-                        $rootScope.cityFilter = $rootScope.subcategoryFilter = null;
+                        $rootScope.subcategoryFilter = null;
+                    }
+                }
+                if(toParams.city){
+                    $rootScope.citySlug = toParams.city;
+                    if(toParams.subcategory == null){
+                        $rootScope.subcategorySlug = 0;
+                        $rootScope.subcategoryFilter = null;
+                    }
+                }
+                if(toParams.category && toParams.subcategory){
+                     $rootScope.categorySlug = toParams.category;
+                     $rootScope.subcategorySlug = toParams.subcategory;
+                     if(toParams.region == null){
+                         $rootScope.regionSlug = 0;
+                         $rootScope.regionFilter = null;
+                     }
+                }*/
+                if(toState.name == 'root.filter-region'){
+                    $rootScope.regionSlug = toParams.region;
+                    if(toParams.city == null){
+                        $rootScope.citySlug = 0;
+                        $rootScope.cityFilter = null;
+                    }
+                    if(toParams.subcategory == null){
+                        $rootScope.subcategorySlug = 0;
+                        $rootScope.subcategoryFilter = null;
                     }
                 }
                 if(toState.name == 'root.filter-city'){
                     $rootScope.citySlug = toParams.city;
-                    $rootScope.regionSlug = toParams.region;
-                    $rootScope.regionFilter = $rootScope.regionFilter;
-                    $rootScope.subcategoryFilter = null;
+                    if(toParams.subcategory == null){
+                        $rootScope.subcategorySlug = 0;
+                        $rootScope.subcategoryFilter = null;
+                    }
+                }
+                if(toState.name == 'root.filter-subcat'){
+                    $rootScope.categorySlug = toParams.category;
+                     $rootScope.subcategorySlug = toParams.subcategory;
+                     if(toParams.city == null){
+                         $rootScope.citySlug = 0;
+                         $rootScope.cityFilter= null;
+                     }
+                     if(toParams.region == null){
+                         $rootScope.regionSlug = 0;
+                         $rootScope.regionFilter = null;
+                     }
                 }
                 if(toState.name == 'root.filter-city-subcat'){
                     $rootScope.regionSlug = toParams.region;
                     $rootScope.citySlug = toParams.city;
                     $rootScope.subcategorySlug = toParams.subcategory;
                 }
-                if(toParams.category)
-                    $rootScope.categorySlug = toParams.category;
-                if(toState.name == 'root.filter-subcat' || toParams.name == 'root.filter-region-subcat') 
+                if(toParams.name == 'root.filter-region-subcat'){
+                    $rootScope.regionSlug = toParams.region;
                     $rootScope.subcategorySlug = toParams.subcategory;
-
+                    if(toParams.city == null){
+                        $rootScope.citySlug = 0;
+                        $rootScope.cityFilter = null;
+                    }
+                }
+   
             });
         })
         .config(function($stateProvider, $urlRouterProvider, $locationProvider){

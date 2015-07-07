@@ -25,10 +25,16 @@ angular.module('Ads')
             $scope.paged = function(newPage){
                 $scope.currentPage = newPage;
             };
-            console.log('algo ', $rootScope.subcategorySlug)
+            
             AdService.getBySubcategory($rootScope.subcategorySlug).success(function(data){
                 $scope.ads= data.items;
                 $scope.totalPages = Math.ceil(data.total_count/$scope.perPage);
+                if(data.region)
+                    $rootScope.regionFilter = data.region.name;
+                if(data.city)
+                    $rootScope.cityFilter = data.city.name;
+                if(data.subcategory)
+                    $rootScope.subcategoryFilter = data.subcategory.name;
             }).error(function(error){
 
             });
@@ -111,13 +117,21 @@ angular.module('Ads')
                 });
             }
 
-            $scope.selectItem = function(item, category_slug,event){
+            $scope.selectItem = function(category_slug,event){
                 angular.element(event.currentTarget).toggleClass('active').children('ul').collapse('toggle');
                 angular.element(event.currentTarget).siblings().removeClass('active').children('ul.in').collapse('hide');
-                $scope.selectedItem = item;
                 $rootScope.categorySlug = category_slug;
             }
-
+            
+            $scope.crumbregionclose = function(){
+                if(!$state.params.subcategory){
+                    $state.go('root');
+                }
+                if($state.params.subcategory){
+                    $state.go('root.filter-subcat',{category: $state.params.category,subcategory:$state.params.subcategory},{inherit:false})
+                }                
+            }
+        
         });
 
 
