@@ -392,6 +392,9 @@ body {
 .ad-image-container{
     margin-right: 10px !important;
 }
+.c_link{
+    cursor: pointer;
+}
 
 
 @media screen and (max-width: 768px){

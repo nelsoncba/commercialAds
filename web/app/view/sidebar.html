@@ -10,13 +10,13 @@
                     <span class="filtro-querySearch">{{querySearch}}</span><a href="#"><span>X</span></a>
                 </li>-->
                 <li ng-if="regionFilter" class="filtro">
-                    <span class="filtro-prov-nom">{{regionFilter}}</span><a ui-sref="#"><span ng-click="crumbregionclose();">&times;</span></a>
+                    <span class="filtro-prov-nom">{{regionFilter}}</span><span class="c_link" ng-click="crumbregionclose();">&times;</span>
                 </li>
                 <li ng-if="cityFilter" class="filtro">
-                    <span class="filtro-local-nom">{{cityFilter}}</span><a ui-sref="#"><span ng-click="crumbcityclose();">&times;</span></a>
+                    <span class="filtro-local-nom">{{cityFilter}}</span><span class="c_link" ng-click="crumbcityclose();">&times;</span>
                 </li>
                 <li ng-if="subcategoryFilter" class="filtro">
-                    <span class="filtro-subcat-nom">{{subcategoryFilter}}</span><a ui-sref="#"><span ng-click="crumbsubcatclose();">&times;</span></a>
+                    <span class="filtro-subcat-nom">{{subcategoryFilter}}</span><span class="c_link" ng-click="crumbsubcatclose();">&times;</span>
                 </li>
              </div>
         </ul>

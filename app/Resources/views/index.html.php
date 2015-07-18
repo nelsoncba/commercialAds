@@ -58,7 +58,7 @@
         <script src="app/controller/FilterController.js"></script>
         <script src="app/lib/simplePagination/simplePagination.js"></script>
         <script src="app/lib/ngPager/ngpager.min.js"></script>
-        
+        <script src="app/service/PaginateService.js"></script>
         <script src="app/service/AdService.js"></script>
         <script src="app/service/WebService.js"></script>
       <!--  <script src="{{asset("js/map.js")}}"></script>

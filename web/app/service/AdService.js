@@ -9,22 +9,22 @@ angular.module('Ads')
 						return error;
 					});
 				},
-				getByRegion: function(region, subcategory){
-					return WebService.request('GET', 'ads/region='+ region +'/subcategory='+ subcategory).success(function(data){
+				getByRegion: function(region, subcategory, page){
+					return WebService.request('GET', 'ads/region='+ region +'/subcategory='+ subcategory + '/page='+ page).success(function(data){
 		                return data;
 		            }).error(function(error){
 		            	return error;
 		            });
 				},
-				getByCity: function(city, subcategory){
-					return WebService.request('GET', 'ads/city='+ city +'/subcategory='+ subcategory).success(function(data){
+				getByCity: function(city, subcategory, page){
+					return WebService.request('GET', 'ads/city='+ city +'/subcategory='+ subcategory +'/page='+page).success(function(data){
 		                return data;
 		            }).error(function(error){
 		            	return error;
 		            });
 				},
-				getBySubcategory: function(subcategory){
-					return WebService.request('GET', 'ads/subcategory=' + subcategory).success(function(data){
+				getBySubcategory: function(subcategory, page){
+					return WebService.request('GET', 'ads/subcategory=' + subcategory + '/page=' + page).success(function(data){
 		                return data;
 		            }).error(function(error){
 		            	return error;

@@ -117,14 +117,15 @@ class ApiAdController extends Controller
     }
     
     /**
-     * @Route("/ads/region={region}/subcategory={subcategory}")
+     * @Route("/ads/region={region}/subcategory={subcategory}/page={page}")
      * @Method({"GET"})
      * @param type $region
      * @param type $subcategory
+     * @param type $page
      * @return type
      * @throws type
      */
-    public function adsByRegionAction($region, $subcategory){
+    public function adsByRegionAction($region, $subcategory, $page, $perPage = 5){
 //         $this->getRequest()->getSession()->remove('address');
 //         $this->getRequest()->getSession()->remove('lat');
 //         $this->getRequest()->getSession()->remove('lng');
@@ -154,7 +155,7 @@ class ApiAdController extends Controller
              return JsonResponse('message','No existen avisos para los parámetros seleccionados.'); */
          
          $paginator = $this->get('knp_paginator');
-         $pagination = $paginator->paginate($ads, $this->get('request')->query->get('page',1),5);
+         $pagination = $paginator->paginate($ads, $this->get('request')->query->get('page',$page),5);
          
          $resp_ads = json_decode($serializer->serialize($pagination, 'json'));
          $n_region=json_decode($serializer->serialize($n_region,'json'));
@@ -163,7 +164,7 @@ class ApiAdController extends Controller
     }
     
     /**
-     * @Route("/ads/city={city}/subcategory={subcategory}")
+     * @Route("/ads/city={city}/subcategory={subcategory}/page={page}")
      * @Method({"GET"})
      * @param type $region
      * @param type $city
@@ -171,7 +172,7 @@ class ApiAdController extends Controller
      * @return type
      * @throws type
      */
-    public function adsByCityAction($city, $subcategory){
+    public function adsByCityAction($city, $subcategory, $page, $perPage = 5){
        
        $serializer = $this->container->get('serializer');
        $em = $this->getDoctrine()->getManager(); 
@@ -184,11 +185,11 @@ class ApiAdController extends Controller
        }
        if($city && !$subcategory){
            if($n_city)
-               $ads = $em->getRepository("CommercialAdsAdBundle:Ad")->findByCitySubcat($n_city, null);
+               $ads = $em->getRepository("CommercialAdsAdBundle:Ad")->findByCitySubcat($n_city, null); //no existe metodo
        }
        
        $paginator = $this->get('knp_paginator');
-       $pagination = $paginator->paginate($ads, $this->get('request')->query->get('page',1),5);
+       $pagination = $paginator->paginate($ads, $this->get('request')->query->get('page',$page),5);
        
        $resp_ads = json_decode($serializer->serialize($pagination, 'json'));
        $n_city =json_decode($serializer->serialize($n_city,'json'));
@@ -201,13 +202,13 @@ class ApiAdController extends Controller
     }
     
     /**
-     * @Route("/ads/subcategory={subcategory}")
+     * @Route("/ads/subcategory={subcategory}/page={page}")
      * @Method({"GET"})
      * @param type $subcategory
      * @return type
      * @throws type
      */
-    public function adsBySubcategoryAction($subcategory){
+    public function adsBySubcategoryAction($subcategory, $page){
        $ads = null;
        $serializer = $this->container->get('serializer');
        /*$this->getRequest()->getSession()->remove('address');
@@ -225,7 +226,7 @@ class ApiAdController extends Controller
        }
        
        $paginator = $this->get('knp_paginator');
-       $pagination = $paginator->paginate($ads, $this->get('request')->query->get('page',1),5);
+       $pagination = $paginator->paginate($ads, $this->get('request')->query->get('page',$page),5);
        
        $n_subcategory = json_decode($serializer->serialize($n_subcategory, 'json'));
        $resp_ads = json_decode($serializer->serialize($pagination, 'json'));

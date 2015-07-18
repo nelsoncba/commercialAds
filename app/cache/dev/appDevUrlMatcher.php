@@ -264,29 +264,29 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         not_ads_by_coords:
 
                         // commercialads_ad_apiad_adsbyregion
-                        if (0 === strpos($pathinfo, '/api/ads/region') && preg_match('#^/api/ads/region\\=(?P<region>[^/]++)/subcategory\\=(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
+                        if (0 === strpos($pathinfo, '/api/ads/region') && preg_match('#^/api/ads/region\\=(?P<region>[^/]++)/subcategory\\=(?P<subcategory>[^/]++)/page\\=(?P<page>[^/]++)$#s', $pathinfo, $matches)) {
                             if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                                 $allow = array_merge($allow, array('GET', 'HEAD'));
                                 goto not_commercialads_ad_apiad_adsbyregion;
                             }
 
-                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_ad_apiad_adsbyregion')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::adsByRegionAction',));
+                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_ad_apiad_adsbyregion')), array (  'perPage' => 5,  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::adsByRegionAction',));
                         }
                         not_commercialads_ad_apiad_adsbyregion:
 
                         // commercialads_ad_apiad_adsbycity
-                        if (0 === strpos($pathinfo, '/api/ads/city') && preg_match('#^/api/ads/city\\=(?P<city>[^/]++)/subcategory\\=(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
+                        if (0 === strpos($pathinfo, '/api/ads/city') && preg_match('#^/api/ads/city\\=(?P<city>[^/]++)/subcategory\\=(?P<subcategory>[^/]++)/page\\=(?P<page>[^/]++)$#s', $pathinfo, $matches)) {
                             if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                                 $allow = array_merge($allow, array('GET', 'HEAD'));
                                 goto not_commercialads_ad_apiad_adsbycity;
                             }
 
-                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_ad_apiad_adsbycity')), array (  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::adsByCityAction',));
+                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'commercialads_ad_apiad_adsbycity')), array (  'perPage' => 5,  '_controller' => 'CommercialAds\\AdBundle\\Controller\\ApiAdController::adsByCityAction',));
                         }
                         not_commercialads_ad_apiad_adsbycity:
 
                         // commercialads_ad_apiad_adsbysubcategory
-                        if (0 === strpos($pathinfo, '/api/ads/subcategory') && preg_match('#^/api/ads/subcategory\\=(?P<subcategory>[^/]++)$#s', $pathinfo, $matches)) {
+                        if (0 === strpos($pathinfo, '/api/ads/subcategory') && preg_match('#^/api/ads/subcategory\\=(?P<subcategory>[^/]++)/page\\=(?P<page>[^/]++)$#s', $pathinfo, $matches)) {
                             if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                                 $allow = array_merge($allow, array('GET', 'HEAD'));
                                 goto not_commercialads_ad_apiad_adsbysubcategory;
